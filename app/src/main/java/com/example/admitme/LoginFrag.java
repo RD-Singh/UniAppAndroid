@@ -1,7 +1,7 @@
 // Creates the package for the app
 package com.example.admitme;
 
-// Imports the methods need in the java class
+// Imports the methods needed in the java class
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;

@@ -1,7 +1,7 @@
 // Creates the package for the app
 package com.example.admitme;
 
-// Imports the methods need in the java class
+// Imports the methods needed in the java class
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
