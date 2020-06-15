@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "889552776268",
+    "firebase_url": "https://admitme-cf552.firebaseio.com",
+    "project_id": "admitme-cf552",
+    "storage_bucket": "admitme-cf552.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:889552776268:android:0914b5c5aba56a31bb98e9",
+        "android_client_info": {
+          "package_name": "com.example.admitme"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "889552776268-vdmunh99d1fmoogh9eof5oglgq1j23oo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.admitme",
+            "certificate_hash": "64c71879e629d9b55cb0367df3d277826ac10ea4"
+          }
+        },
+        {
+          "client_id": "889552776268-i0iqiin969ef2cfuablb1tbnav0ifqnu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAQcDcwdu0ikrzUjA6vJLUgyi3ttoTd1K0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "889552776268-i0iqiin969ef2cfuablb1tbnav0ifqnu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

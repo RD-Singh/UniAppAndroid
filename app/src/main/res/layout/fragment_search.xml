@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Creates the search fragment in the bottom navigation bar -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SearchFrag">
+
+    <!-- Creates the search text -->
+    <TextView
+        android:id="@+id/search_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:text="SEARCH"
+        android:textSize="60sp" />
+
+    <!-- Creates the search bar -->
+    <EditText
+        android:id="@+id/search_edit_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/search_text"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/edit_text_round"
+        android:ems="17"
+        android:hint="Search For Universities Here"
+        android:padding="10dp" />
+
+    <!-- Creates the university recycler view -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/university_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/search_edit_text"
+        android:layout_marginTop="15dp" />
+
+</RelativeLayout>
