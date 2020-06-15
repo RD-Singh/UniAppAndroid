@@ -1,11 +1,12 @@
 package com.example.admitme;
 
-import android.app.Activity;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,7 +17,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.ImageView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -30,7 +30,6 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-import java.util.concurrent.Executor;
 
 public class SearchFrag extends Fragment {
 
@@ -42,7 +41,7 @@ public class SearchFrag extends Fragment {
     private FirebaseFirestore fStore;
     private FirebaseAuth fAuth;
     private int bookmark;
-    private String uid;
+    private String userID;
     ArrayList<Universities> mUniversities;
 
     @Override
@@ -75,6 +74,18 @@ public class SearchFrag extends Fragment {
         });
 
         buildRecyclerView(v);
+
+        UniversityAdapter.UniversityViewHolder.mItemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                UniversityInfoFrag universityInfoFrag = new UniversityInfoFrag();
+                FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.app_container, universityInfoFrag);
+                fragmentTransaction.commit();
+
+            }
+        });
 
         return v;
     }

@@ -1,5 +1,6 @@
 package com.example.admitme;
 
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,9 +8,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -22,16 +24,18 @@ public class UniversityAdapter extends RecyclerView.Adapter<UniversityAdapter.Un
 
     public static class UniversityViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView mUniversityName;
-        public TextView mLocation;
-        public ImageView mBookmarkImage;
-        public boolean counter;
+        public static TextView mUniversityName;
+        public static TextView mLocation;
+        public static ImageView mBookmarkImage;
+        public static CardView mItemView;
+        public static boolean counter;
 
         public UniversityViewHolder(@NonNull View itemView) {
             super(itemView);
             mUniversityName = itemView.findViewById(R.id.university_name);
             mLocation = itemView.findViewById(R.id.location);
             mBookmarkImage = itemView.findViewById(R.id.bookmark_image);
+            mItemView = itemView.findViewById(R.id.university_item);
             counter = false;
         }
 
@@ -83,6 +87,7 @@ public class UniversityAdapter extends RecyclerView.Adapter<UniversityAdapter.Un
                 }
             }
         });
+
     }
 
     @Override
