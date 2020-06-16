@@ -75,7 +75,17 @@ public class SearchFrag extends Fragment {
 
         buildRecyclerView(v);
 
+        UniversityAdapter.UniversityViewHolder.mItemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+                UniversityInfoFrag universityInfoFrag = new UniversityInfoFrag();
+                FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.app_container, universityInfoFrag);
+                fragmentTransaction.commit();
+
+            }
+        });
 
         return v;
     }
@@ -107,7 +117,6 @@ public class SearchFrag extends Fragment {
             String universityName;
             double acceptanceRate;
             String universityLocation;
-            boolean toggled;
 
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -116,16 +125,9 @@ public class SearchFrag extends Fragment {
                     for (QueryDocumentSnapshot document : task.getResult()) {
 
                         universityName = document.getId();
+                        bookmarkResource(universityName);
                         acceptanceRate = document.getDouble("AcceptanceRate");
                         universityLocation = document.getString("Location");
-                        toggled = document.getBoolean("bookmarkToggled");
-
-                        if(toggled){
-                            bookmark = R.drawable.ic_bookmark_filled;
-                        }
-                        else{
-                            bookmark = R.drawable.ic_bookmark_not_filled;
-                        }
 
                         mUniversities.add(new Universities(universityName, universityLocation, acceptanceRate, bookmark));
 
@@ -138,6 +140,29 @@ public class SearchFrag extends Fragment {
 
     }
 
+    public int setBookmark(int bookmark) {
+        this.bookmark = bookmark;
+        return this.bookmark;
+    }
+
+    public void bookmarkResource(String universityName) {
+
+        DocumentReference dRef = fStore.collection("UNIVERSITIES").document(universityName);
+
+        dRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            int bMark;
+
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
+                if (documentSnapshot.getBoolean("bookmarkToggled")) {
+                    bMark = R.drawable.ic_bookmark_filled;
+                } else {
+                    bMark = R.drawable.ic_bookmark_not_filled;
+                }
+                setBookmark(bMark);
+            }
+        });
+    }
 
     public static void getAllFromFireStore(OnCompleteListener<QuerySnapshot> listener) {
         FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
