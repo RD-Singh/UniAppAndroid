@@ -5,74 +5,90 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/gradientOne"
-    android:padding="16dp"
+    android:background="@drawable/background"
     tools:context=".LoginFrag">
 
     <!-- Creates the app logo -->
+
     <ImageView
         android:id="@+id/login_logo"
         android:layout_width="200dp"
         android:layout_height="200dp"
-        android:layout_above="@id/login_AdmitMe"
+        android:layout_above="@id/login_AdmitU"
         android:layout_centerHorizontal="true"
         android:src="@drawable/admitme_logo_placeholder" />
 
     <!-- Creates the name of the app -->
     <TextView
-        android:id="@+id/login_AdmitMe"
+        android:id="@+id/login_AdmitU"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@id/email"
         android:layout_centerInParent="true"
+        android:layout_marginBottom="10dp"
         android:text="@string/app_name"
-        android:textSize="45sp" />
+        android:textColor="@color/appTextColour"
+        android:textSize="45sp"
+        android:textStyle="bold" />
 
     <!-- Creates the email edit text field -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/email"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/login_AdmitMe"
-        android:layout_centerHorizontal="true"
+        android:layout_centerInParent="true"
+        android:textColorHint="@color/appTextColour"
         app:errorEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/login_AdmitMe"
+            android:layout_width="340dp"
+            android:layout_height="40dp"
+            android:layout_below="@id/login_AdmitU"
             android:hint="Email"
-            android:inputType="text" />
+            android:inputType="text"
+            android:padding="10dp"
+            android:textStyle="bold"
+            android:background="@drawable/edit_text_round" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <!-- Creates the password edit text field -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/password"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/email"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:textColorHint="@color/appTextColour"
         app:errorEnabled="true"
-        app:passwordToggleEnabled="true">
+        app:passwordToggleEnabled="true"
+        app:passwordToggleTint="@color/appTextColour">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="340dp"
+            android:layout_height="40dp"
+            android:background="@drawable/edit_text_round"
             android:hint="Password"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:padding="10dp"
+            android:textStyle="bold" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <!-- Logs in the user when clicked -->
     <Button
         android:id="@+id/login"
-        android:layout_width="240dp"
-        android:layout_height="40dp"
+        android:layout_width="295dp"
+        android:layout_height="48dp"
         android:layout_below="@id/password"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
         android:background="@drawable/button_round"
         android:text="Login"
-        android:textColor="@color/gradientOne" />
+        android:textColor="@color/buttonTextColour"
+        android:textSize="16sp"
+        android:textStyle="bold" />
 
     <!-- Creates the forget password text -->
     <TextView
@@ -83,7 +99,22 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
         android:text="Forgot Your Password? Click here."
-        android:textSize="20sp" />
+        android:textColor="@color/appTextColour"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+
+    <!-- Creates the don't have an account text -->
+    <TextView
+        android:id="@+id/sign_up_here"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/forgetPassword"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:text="Don't have an account? Sign up."
+        android:textColor="@color/appTextColour"
+        android:textSize="15sp"
+        android:textStyle="bold" />
 
     <!-- Creates the progress bar -->
     <ProgressBar
@@ -91,7 +122,7 @@
         style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/forgetPassword"
+        android:layout_below="@id/sign_up_here"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
         android:indeterminateDrawable="@drawable/progress"

@@ -4,7 +4,6 @@
     android:layout_height="650dp"
     android:orientation="vertical"
     android:id="@+id/university_pop_up"
-    android:background="@drawable/background"
     android:layout_gravity="center">
 
     <ImageView

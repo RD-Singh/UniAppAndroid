@@ -1,17 +1,61 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Creates the home fragment in the bottom navigation bar -->
+<?xml version="1.0" encoding="utf-8"?><!-- Creates the home fragment in the bottom navigation bar -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background"
     tools:context=".HomeFrag">
 
-    <!-- Signs the user out when it gets clicked -->
-    <Button
-        android:id="@+id/signOut"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="SignOut" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="15dp"
+        android:background="@drawable/button_round"
+        android:orientation="vertical"
+        android:padding="15dp">
+
+        <TextView
+            android:id="@+id/university_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="UBC"
+            android:textSize="50sp" />
+
+        <TextView
+            android:id="@+id/university_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SFU"
+            android:textSize="50sp" />
+
+        <TextView
+            android:id="@+id/university_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="U of T"
+            android:textSize="50sp" />
+
+        <TextView
+            android:id="@+id/university_4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="U of W"
+            android:textSize="50sp" />
+
+        <TextView
+            android:id="@+id/university_5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="UVIC"
+            android:textSize="50sp" />
+
+        <TextView
+            android:id="@+id/university_6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="KPU"
+            android:textSize="50sp" />
+
+    </LinearLayout>
 
 </RelativeLayout>

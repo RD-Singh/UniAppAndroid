@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -37,6 +38,7 @@ public class SignUp extends Fragment {
     private TextInputLayout fullname, username, email, password, confirmPassword;
     private String fullnameStr, usernameStr, emailStr, passwordStr, confirmPasswordStr, userID;
     private ProgressBar progressBar;
+    private TextView loginHere;
     private FirebaseAuth fAuth;
     private FirebaseFirestore fStore;
     private FirebaseUser fUser;
@@ -184,6 +186,15 @@ public class SignUp extends Fragment {
             }
         });
 
+        loginHere.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                loginHere();
+
+            }
+        });
+
         return v;
     }
 
@@ -226,6 +237,15 @@ public class SignUp extends Fragment {
         });
     }
 
+    public void loginHere(){
+
+        LoginFrag loginFrag = new LoginFrag();
+        FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_container, loginFrag);
+        fragmentTransaction.commit();
+
+    }
+
     private void setupStr() {
         fullnameStr = fullname.getEditText().getText().toString();
         emailStr = email.getEditText().getText().toString().trim();
@@ -242,5 +262,6 @@ public class SignUp extends Fragment {
         confirmPassword = v.findViewById(R.id.confirm_password);
         gotoLogin = v.findViewById(R.id.sign_up);
         progressBar = v.findViewById(R.id.signUpProgressBar);
+        loginHere = v.findViewById(R.id.login_here);
     }
 }

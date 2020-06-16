@@ -7,4 +7,7 @@
     <color name="gradientTwo">#007C11</color>
     <color name="gradientThree">#FFFFFF</color>
     <color name="textInputLayoutColor">#FFA1F2</color>
+    <color name="appTextColour">#9E6B6B</color>
+    <color name="buttonTextColour">#0089FF</color>
+    <color name="appBackgroundColour">#1DBCE5</color>
 </resources>

@@ -1,10 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Creates the main page where user can sign in or sign up -->
+<?xml version="1.0" encoding="utf-8"?><!-- Creates the main page where user can sign in or sign up -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/gradientOne"
+    android:background="@drawable/background"
     tools:context=".MainFrag">
 
     <!-- Creates the app logo -->
@@ -22,31 +21,37 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:text="AdmitMe"
-        android:textSize="45dp" />
+        android:text="@string/app_name"
+        android:textColor="@color/appTextColour"
+        android:textSize="45sp"
+        android:textStyle="bold" />
 
     <!-- Goes to the login page when clicked -->
     <Button
         android:id="@+id/sign_in"
-        android:layout_width="240dp"
-        android:layout_height="40dp"
+        android:layout_width="295dp"
+        android:layout_height="48dp"
         android:layout_below="@id/AdmitMe"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="50dp"
         android:background="@drawable/button_round"
-        android:text="Sign In"
-        android:textColor="@color/gradientOne" />
+        android:text="LogIn"
+        android:textColor="@color/buttonTextColour"
+        android:textSize="16sp"
+        android:textStyle="bold" />
 
     <!-- Goes to the sign up page when clicked -->
     <Button
         android:id="@+id/sign_up"
-        android:layout_width="240dp"
-        android:layout_height="40dp"
+        android:layout_width="295dp"
+        android:layout_height="48dp"
         android:layout_below="@id/sign_in"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         android:background="@drawable/button_round"
         android:text="Sign Up"
-        android:textColor="@color/gradientOne" />
+        android:textColor="@color/buttonTextColour"
+        android:textSize="16sp"
+        android:textStyle="bold" />
 
 </RelativeLayout>

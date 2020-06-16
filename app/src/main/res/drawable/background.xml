@@ -3,7 +3,7 @@
 
     <!-- Creates the background colour for the whole app -->
     <gradient
-        android:startColor="@color/gradientOne"
-        android:endColor="@color/gradientOne" />
+        android:startColor="@color/appBackgroundColour"
+        android:endColor="@color/appBackgroundColour" />
 
 </shape>

@@ -9,6 +9,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,7 +41,7 @@ public class LoginFrag extends Fragment implements Update {
     private TextInputLayout email, password;
     private String emailStr, passwordStr, userID;
     private ProgressBar progressBar;
-    private TextView forgetPassword;
+    private TextView forgetPassword, signUpHere;
     private FirebaseAuth firebaseAuth;
     private FirebaseFirestore firebaseFirestore;
     private FirebaseUser firebaseUser;
@@ -121,6 +122,15 @@ public class LoginFrag extends Fragment implements Update {
             public void onClick(View v) {
                 // Calls the method to reset the user's password
                 resetPassword(v);
+            }
+        });
+
+        signUpHere.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                signUpHere();
+
             }
         });
 
@@ -220,6 +230,15 @@ public class LoginFrag extends Fragment implements Update {
         email.getEditText().setText("");
     }
 
+    public void signUpHere(){
+
+        SignUp signUp = new SignUp();
+        FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_container, signUp);
+        fragmentTransaction.commit();
+
+    }
+
     private void setupStr() {
         emailStr = email.getEditText().getText().toString().trim();
         passwordStr = password.getEditText().getText().toString().trim();
@@ -231,6 +250,7 @@ public class LoginFrag extends Fragment implements Update {
         password = v.findViewById(R.id.password);
         progressBar = v.findViewById(R.id.progressBar);
         forgetPassword = v.findViewById(R.id.forgetPassword);
+        signUpHere = v.findViewById(R.id.sign_up_here);
     }
 
     public void homePage() {

@@ -6,14 +6,9 @@
 
     <!-- Creates the round edges on the edit texts to make them look round -->
     <corners
-        android:bottomLeftRadius="15dp"
-        android:bottomRightRadius="15dp"
-        android:topLeftRadius="15dp"
-        android:topRightRadius="15dp" />
-
-    <!-- Creates a small border around the round edit texts -->
-    <stroke
-        android:width="1dp"
-        android:color="#000000" />
+        android:bottomLeftRadius="30dp"
+        android:bottomRightRadius="30dp"
+        android:topLeftRadius="30dp"
+        android:topRightRadius="30dp" />
 
 </shape>

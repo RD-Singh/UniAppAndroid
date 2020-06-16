@@ -7,4 +7,12 @@
     android:orientation="vertical"
     tools:context=".SettingsFrag">
 
+    <!-- Signs the user out when it gets clicked -->
+    <Button
+        android:id="@+id/signOut"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="SignOut" />
+
 </RelativeLayout>
