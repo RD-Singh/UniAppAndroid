@@ -24,28 +24,32 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class UniversityAdapter extends RecyclerView.Adapter<UniversityAdapter.UniversityViewHolder> {
 
     private ArrayList<Universities> mUniversities;
     private FirebaseFirestore fStore;
     private FirebaseAuth fAuth;
+    public boolean toggled = false;
 
     public static class UniversityViewHolder extends RecyclerView.ViewHolder {
 
         public TextView mUniversityName;
         public TextView mLocation;
         public ImageView mBookmarkImage;
+        public TextView mAcceptanceRate;
         public CardView mItemView;
-        public boolean counter;
 
         public UniversityViewHolder(@NonNull View itemView) {
             super(itemView);
             mUniversityName = itemView.findViewById(R.id.university_name);
             mLocation = itemView.findViewById(R.id.location);
+            mAcceptanceRate = itemView.findViewById(R.id.acceptance_rate);
             mBookmarkImage = itemView.findViewById(R.id.bookmark_image);
             mItemView = itemView.findViewById(R.id.university_item);
-            counter = false;
+
         }
 
     }
@@ -76,45 +80,25 @@ public class UniversityAdapter extends RecyclerView.Adapter<UniversityAdapter.Un
 
         holder.mUniversityName.setText(currentItem.getUniversityName());
         holder.mLocation.setText(currentItem.getUniversityLocation());
+        holder.mAcceptanceRate.setText(String.valueOf(currentItem.getAcceptanceRate()));
         holder.mBookmarkImage.setImageResource(currentItem.getBookmarkResource());
 
         holder.mBookmarkImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DocumentReference dRef = fStore.getInstance().collection("ACCOUNTS").document(fAuth.getCurrentUser().getUid())
-                        .collection("SELECTED UNIVERSITIES").document(currentItem.getUniversityName());
+                DocumentReference dRef = fStore.getInstance().collection("ACCOUNTS").document(fAuth.getCurrentUser().getUid());
 
-                dRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-
-                        if(task.isSuccessful())
-                        {
-                            DocumentSnapshot documentSnapshot = task.getResult();
-                            if(documentSnapshot.exists())
-                            {
-
-                            }else{
-
-                            }
-                        }
-
-                    }
-                });
-
-
-                if (holder.counter) {
-
-                    holder.counter = false;
-                    dRef.update("bookmarkToggled", holder.counter);
+                if (toggled) {
+                    toggled = false;
+                    dRef.collection("SELECTED UNIVERSITIES").document(currentItem.getUniversityName()).delete();
                     holder.mBookmarkImage.setImageResource(R.drawable.ic_bookmark_not_filled);
-
                 } else {
-
-                    holder.counter = true;
-                    dRef.update("bookmarkToggled", holder.counter);
+                    toggled = true;
+                    Map<String, Object> info = new HashMap<>();
+                    info.put("AcceptanceRate", currentItem.getAcceptanceRate());
+                    info.put("Location", currentItem.getUniversityLocation());
+                    dRef.collection("SELECTED UNIVERSITIES").document(currentItem.getUniversityName()).set(info);
                     holder.mBookmarkImage.setImageResource(R.drawable.ic_bookmark_filled);
-
                 }
             }
         });

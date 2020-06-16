@@ -30,6 +30,8 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class SearchFrag extends Fragment {
 
@@ -107,7 +109,6 @@ public class SearchFrag extends Fragment {
             String universityName;
             double acceptanceRate;
             String universityLocation;
-            boolean toggled;
 
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -118,9 +119,32 @@ public class SearchFrag extends Fragment {
                         universityName = document.getId();
                         acceptanceRate = document.getDouble("AcceptanceRate");
                         universityLocation = document.getString("Location");
-                        toggled = document.getBoolean("bookmarkToggled");
 
-                        if(toggled){
+                        DocumentReference dRef = fStore.getInstance().collection("ACCOUNTS").document(fAuth.getCurrentUser().getUid());
+
+                        DocumentReference uRef = fStore.getInstance().collection("UNIVERSITIES").document(universityName);
+
+                        dRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+
+                                if(task.isSuccessful())
+                                {
+                                    DocumentSnapshot document = task.getResult();
+                                    if(document.exists())
+                                    {
+                                        mAdapter.toggled = true;
+                                    }
+                                    else
+                                    {
+                                        mAdapter.toggled = true;
+                                    }
+                                }
+
+                            }
+                        });
+
+                        if(mAdapter.toggled){
                             bookmark = R.drawable.ic_bookmark_filled;
                         }
                         else{
