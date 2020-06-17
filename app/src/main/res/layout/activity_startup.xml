@@ -18,10 +18,14 @@
     <!-- Creates the bottom navigation bar for the app -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_nav"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
-        android:background="@color/gradientOne"
+        android:layout_margin="10dp"
+        app:itemIconTint="@color/appTextColour"
+        app:itemTextColor="@color/appTextColour"
+        android:background="@drawable/button_round"
         app:menu="@menu/bottom_nav_bar" />
 
 </RelativeLayout>

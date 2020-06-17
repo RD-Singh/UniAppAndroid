@@ -1,61 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?><!-- Creates the home fragment in the bottom navigation bar -->
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background"
+    android:orientation="vertical"
     tools:context=".HomeFrag">
 
     <LinearLayout
+        android:id="@+id/university_one"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="15dp"
-        android:background="@drawable/button_round"
-        android:orientation="vertical"
-        android:padding="15dp">
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@drawable/university_round"
+        android:layout_margin="20dp"
+        android:padding="20dp"
+        android:orientation="vertical">
 
         <TextView
-            android:id="@+id/university_1"
+            android:id="@+id/university_one_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textColor="@color/appTextColour"
+            android:textStyle="bold"
+            android:textSize="50sp"
             android:text="UBC"
-            android:textSize="50sp" />
+            android:layout_gravity="center"/>
 
         <TextView
-            android:id="@+id/university_2"
+            android:id="@+id/university_one_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="SFU"
-            android:textSize="50sp" />
-
-        <TextView
-            android:id="@+id/university_3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="U of T"
-            android:textSize="50sp" />
-
-        <TextView
-            android:id="@+id/university_4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="U of W"
-            android:textSize="50sp" />
-
-        <TextView
-            android:id="@+id/university_5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="UVIC"
-            android:textSize="50sp" />
-
-        <TextView
-            android:id="@+id/university_6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="KPU"
-            android:textSize="50sp" />
+            android:textAlignment="center"
+            android:textColor="@color/appTextColour"
+            android:textStyle="bold"
+            android:textSize="25sp"
+            android:text="Number One - In Vancouver, BC. One of the best universities in Canada."
+            android:layout_gravity="center"/>
 
     </LinearLayout>
 
-</RelativeLayout>
+    <LinearLayout
+        android:id="@+id/university_two"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@drawable/university_round"
+        android:layout_margin="20dp"
+        android:padding="20dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/university_two_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textColor="@color/appTextColour"
+            android:textStyle="bold"
+            android:textSize="50sp"
+            android:text="U of T"
+            android:layout_gravity="center"/>
+
+        <TextView
+            android:id="@+id/university_two_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textColor="@color/appTextColour"
+            android:textStyle="bold"
+            android:textSize="25sp"
+            android:text="Number Two - In Toronto, ON. One of the best universities in Canada."
+            android:layout_gravity="center"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/university_three"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@drawable/university_round"
+        android:layout_margin="20dp"
+        android:padding="20dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/university_three_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textColor="@color/appTextColour"
+            android:textStyle="bold"
+            android:textSize="50sp"
+            android:text="O of W"
+            android:layout_gravity="center"/>
+
+        <TextView
+            android:id="@+id/university_three_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textColor="@color/appTextColour"
+            android:textStyle="bold"
+            android:textSize="25sp"
+            android:text="Number Three - In Waterloo, ON. One of the best universities in Canada."
+            android:layout_gravity="center"/>
+
+    </LinearLayout>
+
+</LinearLayout>
