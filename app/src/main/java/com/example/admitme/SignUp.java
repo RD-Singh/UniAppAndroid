@@ -12,10 +12,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -26,6 +32,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -38,7 +46,7 @@ public class SignUp extends Fragment {
     private TextInputLayout fullname, username, email, password, confirmPassword;
     private String fullnameStr, usernameStr, emailStr, passwordStr, confirmPasswordStr, userID;
     private ProgressBar progressBar;
-    private TextView loginHere;
+    private static String URL_SIGNUP = "https://192.168.1.71/admitu/signup.php";
     private FirebaseAuth fAuth;
     private FirebaseFirestore fStore;
     private FirebaseUser fUser;
@@ -164,34 +172,17 @@ public class SignUp extends Fragment {
         View v = inflater.inflate(R.layout.fragment_sign_up, container, false);
 
         setupUI(v);
-        fAuth = FirebaseAuth.getInstance();
-        fStore = FirebaseFirestore.getInstance();
-
-        if (fAuth.getCurrentUser() != null) {
-            gotoLogin();
-        }
 
         gotoLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 setupStr();
-                progressBar.setVisibility(View.VISIBLE);
 
                 if (validateFullname() | validateUsername() | validateEmail() | validatePassword() | validateConfirmPassword()) {
-                    progressBar.setVisibility(View.GONE);
+
                 } else {
                     addAccount();
-                    progressBar.setVisibility(View.GONE);
                 }
-            }
-        });
-
-        loginHere.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                loginHere();
-
             }
         });
 
@@ -199,50 +190,87 @@ public class SignUp extends Fragment {
     }
 
     private void addAccount() {
-        fAuth.createUserWithEmailAndPassword(emailStr, passwordStr).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+//        fAuth.createUserWithEmailAndPassword(emailStr, passwordStr).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+//            @Override
+//            public void onComplete(@NonNull Task<AuthResult> task) {
+//
+//                if (task.isSuccessful()) {
+//
+//                    fUser = fAuth.getCurrentUser();
+//
+//                    userID = fAuth.getCurrentUser().getUid();
+//                    DocumentReference dRef = fStore.collection("ACCOUNTS").document(userID);
+//                    Map<String, Object> accounts = new HashMap<>();
+//                    accounts.put("Full Name", fullnameStr);
+//                    accounts.put("Email", emailStr);
+//                    accounts.put("Username", usernameStr);
+//                    accounts.put("Password", passwordStr);
+//                    dRef.set(accounts).addOnSuccessListener(new OnSuccessListener<Void>() {
+//                        @Override
+//                        public void onSuccess(Void aVoid) {
+//                            Log.d(TAG, "onSuccess: user Profile created for " + userID);
+//                            Toast.makeText(SignUp.this.getContext(), "Sign Up Successful", Toast.LENGTH_SHORT).show();
+//                        }
+//                    }).addOnFailureListener(new OnFailureListener() {
+//                        @Override
+//                        public void onFailure(@NonNull Exception e) {
+//                            Log.d(TAG, "onFailure: " + e.toString());
+//                            Toast.makeText(SignUp.this.getContext(), "Sign Up unsuccessful. Please try again later.", Toast.LENGTH_SHORT).show();
+//                        }
+//                    });
+//
+//                    gotoLogin();
+//
+//                } else {
+//                    Toast.makeText(SignUp.this.getContext(), "Error! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//        });
+        progressBar.setVisibility(View.VISIBLE);
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_SIGNUP, new Response.Listener<String>() {
             @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
+            public void onResponse(String response) {
 
-                if (task.isSuccessful()) {
+            try{
+                JSONObject jsonObject = new JSONObject(response);
+                String success = jsonObject.getString("success");
 
-                    fUser = fAuth.getCurrentUser();
+                if(success.equals("1")){
+                    Toast.makeText(SignUp.this.getContext(), "Sign Up successful", Toast.LENGTH_SHORT).show();
+                }else{
 
-                    userID = fAuth.getCurrentUser().getUid();
-                    DocumentReference dRef = fStore.collection("ACCOUNTS").document(userID);
-                    Map<String, Object> accounts = new HashMap<>();
-                    accounts.put("Full Name", fullnameStr);
-                    accounts.put("Email", emailStr);
-                    accounts.put("Username", usernameStr);
-                    accounts.put("Password", passwordStr);
-                    dRef.set(accounts).addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void aVoid) {
-                            Log.d(TAG, "onSuccess: user Profile created for " + userID);
-                            Toast.makeText(SignUp.this.getContext(), "Sign Up Successful", Toast.LENGTH_SHORT).show();
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Log.d(TAG, "onFailure: " + e.toString());
-                            Toast.makeText(SignUp.this.getContext(), "Sign Up unsuccessful. Please try again later.", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-
-                    gotoLogin();
-
-                } else {
-                    Toast.makeText(SignUp.this.getContext(), "Error! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
-        });
-    }
+            catch(Exception e){
+                e.printStackTrace();
+                Toast.makeText(SignUp.this.getContext(), "Error! " + e.toString(), Toast.LENGTH_SHORT).show();
+                System.out.println(e.toString());
+                progressBar.setVisibility(View.GONE);
+            }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(SignUp.this.getContext(), "Error! " + error.toString(), Toast.LENGTH_SHORT).show();
+                progressBar.setVisibility(View.GONE);
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
 
-    public void loginHere(){
+                Map<String, String> accounts = new HashMap<>();
+                accounts.put("Full Name", fullnameStr);
+                accounts.put("Email", emailStr);
+                accounts.put("Username", usernameStr);
+                accounts.put("Password", passwordStr);
 
-        LoginFrag loginFrag = new LoginFrag();
-        FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.fragment_container, loginFrag);
-        fragmentTransaction.commit();
+                return accounts;
+            }
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(this.getContext());
+        requestQueue.add(stringRequest);
 
     }
 
@@ -262,6 +290,5 @@ public class SignUp extends Fragment {
         confirmPassword = v.findViewById(R.id.confirm_password);
         gotoLogin = v.findViewById(R.id.sign_up);
         progressBar = v.findViewById(R.id.signUpProgressBar);
-        loginHere = v.findViewById(R.id.login_here);
     }
 }
