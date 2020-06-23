@@ -12,8 +12,8 @@
 
     <ImageView
         android:id="@+id/login_logo"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
+        android:layout_width="173dp"
+        android:layout_height="173dp"
         android:layout_above="@id/login_AdmitU"
         android:layout_centerHorizontal="true"
         android:src="@drawable/admitme_logo_placeholder" />
@@ -28,8 +28,8 @@
         android:layout_marginBottom="10dp"
         android:text="@string/app_name"
         android:textColor="@color/appTextColour"
-        android:textSize="45sp"
-        android:textStyle="bold" />
+        android:textSize="50sp"
+        android:fontFamily="@font/montserrat_bold"/>
 
     <!-- Creates the email edit text field -->
     <com.google.android.material.textfield.TextInputLayout
@@ -38,6 +38,7 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:textColorHint="@color/appTextColour"
+        app:errorTextColor="#ffffff"
         app:errorEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -46,8 +47,9 @@
             android:layout_below="@id/login_AdmitU"
             android:hint="Email"
             android:inputType="text"
+            android:fontFamily="@font/montserrat_bold"
             android:padding="10dp"
-            android:textStyle="bold"
+            android:textColor="@color/appTextColour"
             android:background="@drawable/edit_text_round" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -68,11 +70,12 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="340dp"
             android:layout_height="40dp"
+            android:fontFamily="@font/montserrat_bold"
             android:background="@drawable/edit_text_round"
+            android:textColor="@color/appTextColour"
             android:hint="Password"
             android:inputType="textPassword"
-            android:padding="10dp"
-            android:textStyle="bold" />
+            android:padding="10dp" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -88,7 +91,8 @@
         android:text="Login"
         android:textColor="@color/buttonTextColour"
         android:textSize="16sp"
-        android:textStyle="bold" />
+        android:fontFamily="@font/open_sans_bold"
+        android:textAllCaps="false"/>
 
     <!-- Creates the forget password text -->
     <TextView
@@ -100,12 +104,13 @@
         android:layout_marginTop="15dp"
         android:text="Forgot Your Password? Click here."
         android:textColor="@color/appTextColour"
-        android:textSize="15sp"
-        android:textStyle="bold" />
+        android:textSize="20sp"
+        android:fontFamily="@font/open_sans_bold" />
 
     <!-- Creates the don't have an account text -->
     <TextView
         android:id="@+id/sign_up_here"
+        android:fontFamily="@font/open_sans_bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/forgetPassword"
@@ -113,8 +118,7 @@
         android:layout_marginTop="15dp"
         android:text="Don't have an account? Sign up."
         android:textColor="@color/appTextColour"
-        android:textSize="15sp"
-        android:textStyle="bold" />
+        android:textSize="15sp" />
 
     <!-- Creates the progress bar -->
     <ProgressBar

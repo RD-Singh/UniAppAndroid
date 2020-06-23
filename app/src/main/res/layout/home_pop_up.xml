@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="350dp"
-    android:layout_height="650dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:orientation="vertical"
+    android:layout_margin="30dp"
     android:id="@+id/university_pop_up"
     android:layout_gravity="center">
 
@@ -38,5 +39,10 @@
         android:textSize="25sp"
         android:textAlignment="center"
         android:layout_margin="10dp"/>
+
+    <ScrollView
+        android:id="@+id/scroll_home_pop_up"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
 </RelativeLayout>

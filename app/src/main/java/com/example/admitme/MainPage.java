@@ -9,7 +9,6 @@ import android.view.View;
 
 public class MainPage extends AppCompatActivity {
 
-    private SignUp signUp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

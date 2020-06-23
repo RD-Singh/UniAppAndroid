@@ -12,16 +12,22 @@
             android:title="Full Name" />
 
         <EditTextPreference
+            android:dialogMessage="Enter your username."
+            android:dialogTitle="Username"
+            android:key="key_username"
+            android:title="Username" />
+
+        <EditTextPreference
             android:dialogMessage="Enter your email."
             android:dialogTitle="Email"
             android:key="key_email"
             android:title="Email" />
 
         <EditTextPreference
-            android:dialogMessage="Enter your username."
-            android:dialogTitle="Username"
+            android:dialogMessage="Enter your password."
+            android:dialogTitle="Password"
             android:key="key_username"
-            android:title="Username" />
+            android:title="Password" />
 
     </PreferenceCategory>
 

@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="350dp"
-    android:layout_height="650dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:orientation="vertical"
+    android:layout_margin="30dp"
     android:id="@+id/university_pop_up"
     android:layout_gravity="center">
 
@@ -19,6 +20,8 @@
         android:layout_height="wrap_content"
         android:text="University Name"
         android:layout_centerInParent="true"
+        android:textColor="@color/appTextColour"
+        android:textStyle="bold"
         android:textSize="50sp"
         android:textAlignment="center"/>
 
@@ -28,7 +31,14 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:text="Location"
+        android:textStyle="bold"
+        android:textColor="@color/appTextColour"
         android:layout_below="@id/university_name_txt"
         android:textSize="25sp" />
+
+    <ScrollView
+        android:id="@+id/scroll_home_pop_up"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
 </RelativeLayout>
