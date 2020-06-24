@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,13 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -32,8 +40,14 @@ import com.google.firebase.auth.SignInMethodQueryResult;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
+
 // Creates a class that is linked to the xml file
-public class LoginFrag extends Fragment implements Update {
+public class LoginFrag extends Fragment {
 
     //Creates variables
     private static final String TAG = "TAG";
@@ -44,6 +58,8 @@ public class LoginFrag extends Fragment implements Update {
     private TextView forgetPassword, signUpHere;
     private FirebaseAuth firebaseAuth;
     private FirebaseFirestore firebaseFirestore;
+    private static String URL_LOGIN = "https://phrenological-deale.000webhostapp.com/login.php";
+    SessionManager sessionManager;
     private FirebaseUser firebaseUser;
     private int counter = 0;
 
@@ -86,13 +102,7 @@ public class LoginFrag extends Fragment implements Update {
 
         // Calls the method to set up the user interface views
         setupUI(v);
-        // Initializes the Firebase variables
-        firebaseAuth = FirebaseAuth.getInstance();
-        firebaseFirestore = FirebaseFirestore.getInstance();
-        // Checks if there is a user signed in and if there is it signs the user out
-        if (firebaseAuth.getCurrentUser() != null) {
-            firebaseAuth.signOut();
-        }
+        sessionManager = new SessionManager(this.getContext());
 
         // Sets an onClickListener on the button which takes the user to the home page
         homePageBTN.setOnClickListener(new View.OnClickListener() {
@@ -100,28 +110,15 @@ public class LoginFrag extends Fragment implements Update {
             public void onClick(View v) {
                 // Calls the method to set up the strings
                 setupStr();
-                // Sets the progress bar's visibility to visible
-                progressBar.setVisibility(View.VISIBLE);
 
                 // Checks if validate email and validate password are true. Only then it will run the if, otherwise it will run the else.
                 if (validatePassword() | validateEmail()) {
                     // Sets the progress bar's visibility to gone
-                    progressBar.setVisibility(View.GONE);
                 } else {
                     // Calls the method to login
                     login();
                     // Sets the progress bar's visibility to gone
-                    progressBar.setVisibility(View.GONE);
                 }
-            }
-        });
-
-        // Sets an onClickListener on the forget password text
-        forgetPassword.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Calls the method to reset the user's password
-                resetPassword(v);
             }
         });
 
@@ -137,94 +134,68 @@ public class LoginFrag extends Fragment implements Update {
         return v;
     }
 
-    public void resetPassword(View v) {
-
-        final EditText resetPasswordEmail = new EditText(v.getContext());
-        resetPasswordEmail.setEms(17);
-        final AlertDialog.Builder passwordResetDialogue = new AlertDialog.Builder(v.getContext());
-        passwordResetDialogue.setTitle("Reset Password?");
-        passwordResetDialogue.setMessage("Enter Your Email To Reset Your Password.");
-        passwordResetDialogue.setView(resetPasswordEmail);
-
-        passwordResetDialogue.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-                final String mail = resetPasswordEmail.getText().toString();
-
-                if (mail.isEmpty()) {
-                    Toast.makeText(LoginFrag.this.getContext(), "Please enter an email.", Toast.LENGTH_SHORT).show();
-                } else {
-                    firebaseAuth.fetchSignInMethodsForEmail(mail).addOnCompleteListener(new OnCompleteListener<SignInMethodQueryResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<SignInMethodQueryResult> task) {
-                            boolean check = !task.getResult().getSignInMethods().isEmpty();
-                            if (!check) {
-                                Toast.makeText(LoginFrag.this.getContext(), "This email does not have an account associated with it.", Toast.LENGTH_SHORT).show();
-                                resetPasswordEmail.setText("");
-                            } else {
-                                firebaseAuth.sendPasswordResetEmail(mail).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void aVoid) {
-                                        Toast.makeText(LoginFrag.this.getContext(), "A password reset link has been sent to your email", Toast.LENGTH_SHORT).show();
-                                        counter++;
-                                    }
-                                }).addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        Toast.makeText(LoginFrag.this.getContext(), "Error!\nLink Hasn't Been Sent To Your Email" + e.getMessage(), Toast.LENGTH_SHORT).show();
-                                    }
-                                });
-                            }
-                        }
-                    });
-                }
-
-
-            }
-        });
-
-        passwordResetDialogue.setNegativeButton("No", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-
-            }
-        });
-
-        passwordResetDialogue.create().show();
-
-    }
-
-    @Override
-    public void updatePassword(String password) {
-
-        userID = firebaseAuth.getCurrentUser().getUid();
-
-        DocumentReference pswdRef = firebaseFirestore.collection("ACCOUNTS").document(userID);
-
-        pswdRef.update("password", password);
-
-    }
-
     private void login() {
-        firebaseAuth.signInWithEmailAndPassword(emailStr, passwordStr).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        progressBar.setVisibility(View.VISIBLE);
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_LOGIN, new Response.Listener<String>() {
             @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                firebaseUser = firebaseAuth.getCurrentUser();
-                if (task.isSuccessful()) {
-                    Toast.makeText(LoginFrag.this.getContext(), "Login Successful", Toast.LENGTH_SHORT).show();
+            public void onResponse(String response) {
+                try{
+                    JSONObject jsonObject = new JSONObject(response);
+                    boolean success = jsonObject.getBoolean("success");
+                    JSONArray jsonArray = jsonObject.getJSONArray("login");
 
-                    if (counter > 0) {
-                        updatePassword(passwordStr);
+                    if(success){
+                        Toast.makeText(LoginFrag.this.getContext(), "Login Success!", Toast.LENGTH_SHORT).show();
+
+                        for(int i = 0; i < jsonArray.length(); i++){
+
+                            JSONObject object = jsonArray.getJSONObject(i);
+
+                            String email = object.getString("Email").trim();
+                            String username = object.getString("Username").trim();
+
+                            sessionManager.createSession(email, username);
+
+                            Intent gotoHomePage = new Intent(LoginFrag.this.getContext(), StartupActivity.class);
+                            gotoHomePage.putExtra("email", email);
+                            gotoHomePage.putExtra("username", username);
+                            startActivity(gotoHomePage);
+                        }
+
+                    }else{
+                        Toast.makeText(LoginFrag.this.getContext(), "Incorrect Username or Password.", Toast.LENGTH_SHORT).show();
                     }
-                    homePage();
+                    progressBar.setVisibility(View.GONE);
 
-                } else {
-                    Toast.makeText(LoginFrag.this.getContext(), "Incorrect Email or Password. " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-
+                }catch(Exception e){
+                    e.printStackTrace();
+                    System.out.println(e.toString());
+                    Toast.makeText(LoginFrag.this.getContext(), "Login error! " + e.toString(), Toast.LENGTH_SHORT).show();
+                    progressBar.setVisibility(View.GONE);
                 }
+
             }
-        });
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(LoginFrag.this.getContext(), "Login error! " + error.toString(), Toast.LENGTH_SHORT).show();
+                progressBar.setVisibility(View.GONE);
+            }
+        })
+        {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> account = new HashMap<>();
+
+                account.put("Email", emailStr);
+                account.put("Password", passwordStr);
+
+                return account;
+            }
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(this.getContext());
+        requestQueue.add(stringRequest);
 
         password.getEditText().setText("");
         email.getEditText().setText("");
@@ -253,8 +224,4 @@ public class LoginFrag extends Fragment implements Update {
         signUpHere = v.findViewById(R.id.sign_up_here);
     }
 
-    public void homePage() {
-        Intent gotoHomePage = new Intent(LoginFrag.this.getContext(), StartupActivity.class);
-        startActivity(gotoHomePage);
-    }
 }

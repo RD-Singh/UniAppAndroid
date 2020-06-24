@@ -2,7 +2,6 @@ package com.example.admitme;
 
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -22,34 +21,21 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
 
 public class SignUp extends Fragment {
 
-    public static final String TAG = "TAG";
+    //public static final String TAG = "TAG";
     private TextInputLayout fullname, username, email, password, confirmPassword;
-    private String fullnameStr, usernameStr, emailStr, passwordStr, confirmPasswordStr, userID;
+    private String fullnameStr, usernameStr, emailStr, passwordStr, confirmPasswordStr;
     private ProgressBar progressBar;
-    private static String URL_SIGNUP = "https://192.168.1.71/admitu/signup.php";
-    private FirebaseAuth fAuth;
-    private FirebaseFirestore fStore;
-    private FirebaseUser fUser;
+    private static String URL_SIGNUP = "https://phrenological-deale.000webhostapp.com/signup.php";
 
     private static final Pattern PASSWORD_PATTERN = Pattern.compile("^" + "(?=.*[0-9])" + "(?=.*[a-zA-Z])" + "(?=.*[@#$%^&+=*])" + "(?=\\S+$)" + ".{4,}" + "$");
 
@@ -72,11 +58,7 @@ public class SignUp extends Fragment {
     }
 
     private boolean emptyCheck(String text) {
-        if (text.isEmpty()) {
-            return true;
-        }
-
-        return false;
+        return text.isEmpty();
     }
 
     private void isEmpty(TextInputLayout textInputLayout) {
@@ -160,7 +142,7 @@ public class SignUp extends Fragment {
     private void gotoLogin() {
         SignUp signUp = new SignUp();
         LoginFrag loginFrag = new LoginFrag();
-        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction().remove(signUp);
+        FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction().remove(signUp);
 
         fragmentTransaction.replace(R.id.fragment_container, loginFrag);
         fragmentTransaction.commit();
@@ -190,42 +172,7 @@ public class SignUp extends Fragment {
     }
 
     private void addAccount() {
-//        fAuth.createUserWithEmailAndPassword(emailStr, passwordStr).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-//            @Override
-//            public void onComplete(@NonNull Task<AuthResult> task) {
-//
-//                if (task.isSuccessful()) {
-//
-//                    fUser = fAuth.getCurrentUser();
-//
-//                    userID = fAuth.getCurrentUser().getUid();
-//                    DocumentReference dRef = fStore.collection("ACCOUNTS").document(userID);
-//                    Map<String, Object> accounts = new HashMap<>();
-//                    accounts.put("Full Name", fullnameStr);
-//                    accounts.put("Email", emailStr);
-//                    accounts.put("Username", usernameStr);
-//                    accounts.put("Password", passwordStr);
-//                    dRef.set(accounts).addOnSuccessListener(new OnSuccessListener<Void>() {
-//                        @Override
-//                        public void onSuccess(Void aVoid) {
-//                            Log.d(TAG, "onSuccess: user Profile created for " + userID);
-//                            Toast.makeText(SignUp.this.getContext(), "Sign Up Successful", Toast.LENGTH_SHORT).show();
-//                        }
-//                    }).addOnFailureListener(new OnFailureListener() {
-//                        @Override
-//                        public void onFailure(@NonNull Exception e) {
-//                            Log.d(TAG, "onFailure: " + e.toString());
-//                            Toast.makeText(SignUp.this.getContext(), "Sign Up unsuccessful. Please try again later.", Toast.LENGTH_SHORT).show();
-//                        }
-//                    });
-//
-//                    gotoLogin();
-//
-//                } else {
-//                    Toast.makeText(SignUp.this.getContext(), "Error! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//        });
+
         progressBar.setVisibility(View.VISIBLE);
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_SIGNUP, new Response.Listener<String>() {
@@ -233,13 +180,14 @@ public class SignUp extends Fragment {
             public void onResponse(String response) {
 
             try{
+                Log.e("anyText",response);
                 JSONObject jsonObject = new JSONObject(response);
-                String success = jsonObject.getString("success");
+                boolean success = jsonObject.getBoolean("success");
 
-                if(success.equals("1")){
+                if(success){
                     Toast.makeText(SignUp.this.getContext(), "Sign Up successful", Toast.LENGTH_SHORT).show();
-                }else{
-
+                    progressBar.setVisibility(View.GONE);
+                    gotoLogin();
                 }
             }
             catch(Exception e){
@@ -260,7 +208,7 @@ public class SignUp extends Fragment {
             protected Map<String, String> getParams() throws AuthFailureError {
 
                 Map<String, String> accounts = new HashMap<>();
-                accounts.put("Full Name", fullnameStr);
+                accounts.put("Fullname", fullnameStr);
                 accounts.put("Email", emailStr);
                 accounts.put("Username", usernameStr);
                 accounts.put("Password", passwordStr);

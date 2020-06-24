@@ -29,7 +29,11 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import org.w3c.dom.Document;
+
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class SearchFrag extends Fragment {
 
@@ -41,6 +45,7 @@ public class SearchFrag extends Fragment {
     private FirebaseFirestore fStore;
     private FirebaseAuth fAuth;
     private int bookmark;
+    private boolean toggled;
     private String userID;
     ArrayList<Universities> mUniversities;
 
@@ -48,12 +53,13 @@ public class SearchFrag extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_search, container, false);
 
+
         createUniversityList();
 
         setUpUI(v);
         fAuth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
-
+        buildRecyclerView(v);
         mSearchBar.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -72,10 +78,6 @@ public class SearchFrag extends Fragment {
 
             }
         });
-
-        buildRecyclerView(v);
-
-
 
         return v;
     }
@@ -98,16 +100,24 @@ public class SearchFrag extends Fragment {
 
     }
 
+    public void setToggled(boolean toggled)
+    {
+        this.toggled = toggled;
+    }
+
+    public boolean getToggled()
+    {
+        return toggled;
+    }
+
     public void createUniversityList() {
 
         mUniversities = new ArrayList<>();
-
 
         getAllFromFireStore(new OnCompleteListener<QuerySnapshot>() {
             String universityName;
             double acceptanceRate;
             String universityLocation;
-            boolean toggled;
 
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -118,17 +128,29 @@ public class SearchFrag extends Fragment {
                         universityName = document.getId();
                         acceptanceRate = document.getDouble("AcceptanceRate");
                         universityLocation = document.getString("Location");
-                        toggled = document.getBoolean("bookmarkToggled");
 
-                        if(toggled){
-                            bookmark = R.drawable.ic_bookmark_filled;
-                        }
-                        else{
-                            bookmark = R.drawable.ic_bookmark_not_filled;
-                        }
+                        DocumentReference dRef = fStore.collection("ACCOUNTS").document(fAuth.getCurrentUser().getUid())
+                                .collection("SELECTED UNIVERSITIES").document(universityName);
 
+
+                        dRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                if(task.isSuccessful()) {
+                                    DocumentSnapshot documentSnapshot = task.getResult();
+
+                                    if(documentSnapshot.exists()) {
+                                        bookmark = R.drawable.ic_bookmark_filled;
+
+                                    }
+                                    else{
+                                        bookmark = R.drawable.ic_bookmark_not_filled;
+                                    }
+                                }
+                            }
+
+                        });
                         mUniversities.add(new Universities(universityName, universityLocation, acceptanceRate, bookmark));
-
                     }
                 } else {
                     Log.w(TAG, "Error getting documents.", task.getException());

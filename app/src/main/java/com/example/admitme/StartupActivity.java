@@ -9,12 +9,24 @@ import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.HashMap;
+
 public class StartupActivity extends AppCompatActivity {
+
+    SessionManager sessionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_startup);
+
+        sessionManager = new SessionManager(this);
+        sessionManager.loginStatus();
+
+        HashMap<String, String> user = sessionManager.userDetails();
+
+        System.out.println(user.get(sessionManager.USER_NAME));
+        System.out.println(user.get(sessionManager.EMAIL));
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav);
 
@@ -32,12 +44,6 @@ public class StartupActivity extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.home:
                     selectedFragment = new HomeFrag();
-                    break;
-                case R.id.search:
-                    selectedFragment = new SearchFrag();
-                    break;
-                case R.id.bookmarks:
-                    selectedFragment = new BookmarksFrag();
                     break;
                 case R.id.settings:
                     selectedFragment = new SettingsFrag();
