@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    android:padding="25dp"
+    tools:context=".Enterprising">
+
+    <CheckBox
+        android:id="@+id/question1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat_bold"
+        android:paddingVertical="10dp"
+        android:text="I like to try and influence or persuade people"
+        android:textColor="@color/appTextColour"
+        android:textSize="20sp" />
+
+    <CheckBox
+        android:id="@+id/question2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/question1"
+        android:fontFamily="@font/montserrat_bold"
+        android:paddingVertical="10dp"
+        android:text="I'm quick to take on new responsibilities"
+        android:textColor="@color/appTextColour"
+        android:textSize="20sp" />
+
+    <CheckBox
+        android:id="@+id/question3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/question2"
+        android:fontFamily="@font/montserrat_bold"
+        android:paddingVertical="10dp"
+        android:text="I like selling things or conducting various types of business"
+        android:textColor="@color/appTextColour"
+        android:textSize="20sp" />
+
+    <CheckBox
+        android:id="@+id/question4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/question3"
+        android:fontFamily="@font/montserrat_bold"
+        android:paddingVertical="10dp"
+        android:text="I'm an ambitious person and I set goals for myself"
+        android:textColor="@color/appTextColour"
+        android:textSize="20sp" />
+
+    <CheckBox
+        android:id="@+id/question5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/question4"
+        android:fontFamily="@font/montserrat_bold"
+        android:paddingVertical="10dp"
+        android:text="I would like to start my own business"
+        android:textColor="@color/appTextColour"
+        android:textSize="20sp" />
+
+    <CheckBox
+        android:id="@+id/question6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/question5"
+        android:fontFamily="@font/montserrat_bold"
+        android:paddingVertical="10dp"
+        android:text="I like to lead"
+        android:textColor="@color/appTextColour"
+        android:textSize="20sp" />
+
+    <CheckBox
+        android:id="@+id/question7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/question6"
+        android:fontFamily="@font/montserrat_bold"
+        android:paddingVertical="10dp"
+        android:text="I like to give speeches"
+        android:textColor="@color/appTextColour"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/nextC"
+        android:layout_width="95dp"
+        android:layout_height="48dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/button_round"
+        android:fontFamily="@font/open_sans_bold"
+        android:text="Next"
+        android:textAllCaps="false"
+        android:textColor="@color/buttonTextColour"
+        android:textSize="15sp" />
+
+    <Button
+        android:id="@+id/previousS"
+        android:layout_width="95dp"
+        android:layout_height="48dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="15dp"
+        android:layout_toLeftOf="@id/nextC"
+        android:background="@drawable/button_round"
+        android:fontFamily="@font/open_sans_bold"
+        android:text="Previous"
+        android:textAllCaps="false"
+        android:textColor="@color/buttonTextColour"
+        android:textSize="15sp" />
+
+</RelativeLayout>

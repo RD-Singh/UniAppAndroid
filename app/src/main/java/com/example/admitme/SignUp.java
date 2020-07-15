@@ -1,7 +1,10 @@
 package com.example.admitme;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -13,33 +16,56 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
+//import com.mongodb.client.model.Projections;
+//import com.mongodb.stitch.android.core.Stitch;
+//import com.mongodb.stitch.android.core.StitchAppClient;
+//import com.mongodb.stitch.android.core.auth.StitchUser;
+//import com.mongodb.stitch.android.core.auth.providers.userpassword.UserPasswordAuthProviderClient;
+//import com.mongodb.stitch.android.services.mongodb.remote.RemoteMongoClient;
+//import com.mongodb.stitch.android.services.mongodb.remote.RemoteMongoCollection;
+//import com.mongodb.stitch.core.auth.StitchCredential;
+//import com.mongodb.stitch.core.auth.providers.userpassword.UserPasswordCredential;
+//import com.mongodb.stitch.core.services.mongodb.remote.RemoteInsertOneResult;
+//import com.mongodb.stitch.core.services.mongodb.remote.sync.DefaultSyncConflictResolvers;
+//import com.mongodb.stitch.core.services.mongodb.remote.sync.internal.SyncConfiguration;
 
+import org.bson.Document;
 import org.json.JSONObject;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
+import io.realm.mongodb.App;
+import io.realm.mongodb.AppConfiguration;
+import io.realm.mongodb.Credentials;
+import io.realm.mongodb.User;
+import io.realm.mongodb.mongo.MongoClient;
+import io.realm.mongodb.mongo.MongoCollection;
+import io.realm.mongodb.mongo.MongoDatabase;
+import io.realm.mongodb.mongo.result.InsertOneResult;
+
 public class SignUp extends Fragment {
 
-    //public static final String TAG = "TAG";
     private TextInputLayout fullname, username, email, password, confirmPassword;
     private String fullnameStr, usernameStr, emailStr, passwordStr, confirmPasswordStr;
     private ProgressBar progressBar;
-    private static String URL_SIGNUP = "https://phrenological-deale.000webhostapp.com/signup.php";
 
     private static final Pattern PASSWORD_PATTERN = Pattern.compile("^" + "(?=.*[0-9])" + "(?=.*[a-zA-Z])" + "(?=.*[@#$%^&+=*])" + "(?=\\S+$)" + ".{4,}" + "$");
 
     private Button gotoLogin;
+
+    private MongoClient client;
+    LoginFrag loginFrag = new LoginFrag();
+
+    private MongoCollection<Document> mongoCollection;
+
 
     private final static int MIN_LENGTH = 4;
     private final static int MAX_LENGTH = 16;
@@ -148,12 +174,14 @@ public class SignUp extends Fragment {
         fragmentTransaction.commit();
     }
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.fragment_sign_up, container, false);
 
         setupUI(v);
+
 
         gotoLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -167,7 +195,6 @@ public class SignUp extends Fragment {
                 }
             }
         });
-
         return v;
     }
 
@@ -175,50 +202,55 @@ public class SignUp extends Fragment {
 
         progressBar.setVisibility(View.VISIBLE);
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_SIGNUP, new Response.Listener<String>() {
+        LoginFrag.app.getEmailPasswordAuth().registerUserAsync(emailStr, passwordStr, new App.Callback<Void>() {
             @Override
-            public void onResponse(String response) {
+            public void onResult(App.Result<Void> result) {
+                if(result.isSuccess()){
 
-            try{
-                Log.e("anyText",response);
-                JSONObject jsonObject = new JSONObject(response);
-                boolean success = jsonObject.getBoolean("success");
+                    Credentials credentials = Credentials.emailPassword(emailStr, passwordStr);
 
-                if(success){
-                    Toast.makeText(SignUp.this.getContext(), "Sign Up successful", Toast.LENGTH_SHORT).show();
-                    progressBar.setVisibility(View.GONE);
-                    gotoLogin();
+                    LoginFrag.app.loginAsync(credentials, new App.Callback<User>() {
+                        @Override
+                        public void onResult(App.Result<User> result) {
+                            if(result.isSuccess()){
+
+                                client = LoginFrag.app.currentUser().getMongoClient("mongodb-atlas");
+                                mongoCollection = client.getDatabase("AdmitU").getCollection("Accounts");
+
+                                Document temp = new Document("user_id", LoginFrag.app.currentUser().getId());
+                                temp.append("email", emailStr);
+                                temp.append("password", passwordStr);
+                                temp.append("full_name", fullnameStr);
+                                temp.append("first_time_login", 0);
+
+                                mongoCollection.insertOne(temp).addOnSuccessListener(new OnSuccessListener<InsertOneResult>() {
+                                    @Override
+                                    public void onSuccess(InsertOneResult insertOneResult) {
+                                        System.out.println("Success");
+                                        gotoLogin();
+                                    }
+                                }).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        System.out.println("failed");
+                                    }
+                                });
+                            } else{
+                                Toast.makeText(SignUp.this.getContext(), "Sign Up failed " + result.getError().getErrorMessage(), Toast.LENGTH_SHORT).show();
+                                System.out.println(result.getError().getErrorMessage());
+                            }
+                        }
+                    });
+
+                    LoginFrag.app.currentUser().logOutAsync(new App.Callback<User>() {
+                        @Override
+                        public void onResult(App.Result<User> result) {
+
+                        }
+                    });
                 }
             }
-            catch(Exception e){
-                e.printStackTrace();
-                Toast.makeText(SignUp.this.getContext(), "Error! " + e.toString(), Toast.LENGTH_SHORT).show();
-                System.out.println(e.toString());
-                progressBar.setVisibility(View.GONE);
-            }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(SignUp.this.getContext(), "Error! " + error.toString(), Toast.LENGTH_SHORT).show();
-                progressBar.setVisibility(View.GONE);
-            }
-        }){
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-
-                Map<String, String> accounts = new HashMap<>();
-                accounts.put("Fullname", fullnameStr);
-                accounts.put("Email", emailStr);
-                accounts.put("Username", usernameStr);
-                accounts.put("Password", passwordStr);
-
-                return accounts;
-            }
-        };
-
-        RequestQueue requestQueue = Volley.newRequestQueue(this.getContext());
-        requestQueue.add(stringRequest);
+        });
 
     }
 

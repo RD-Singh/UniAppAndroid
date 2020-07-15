@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context=".WelcomeFrag">
+
+    <ImageView
+        android:id="@+id/login_logo"
+        android:layout_width="173dp"
+        android:layout_height="173dp"
+        android:layout_above="@id/login_AdmitU"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/admitme_logo_placeholder" />
+
+    <TextView
+        android:id="@+id/login_AdmitU"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="10dp"
+        android:text="@string/app_name"
+        android:textColor="@color/appTextColour"
+        android:textSize="50sp"
+        android:fontFamily="@font/montserrat_bold"/>
+
+    <TextView
+        android:id="@+id/app_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="10dp"
+        android:layout_below="@id/login_AdmitU"
+        android:text="@string/app_description"
+        android:gravity="center"
+        android:padding="10dp"
+        android:textColor="@color/appTextColour"
+        android:textSize="20sp"
+        android:fontFamily="@font/montserrat_bold"/>
+
+    <Button
+        android:layout_width="95dp"
+        android:layout_height="48dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/button_round"
+        android:text="Next"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="30dp"
+        android:textAllCaps="false"
+        android:fontFamily="@font/open_sans_bold"
+        android:textColor="@color/buttonTextColour"
+        android:id="@+id/next"
+        android:textSize="15sp"/>
+
+</RelativeLayout>

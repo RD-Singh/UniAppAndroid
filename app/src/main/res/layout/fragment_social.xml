@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    android:padding="25dp"
+    tools:context=".Social">
+
+    <CheckBox
+        android:id="@+id/question1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat_bold"
+        android:paddingVertical="10dp"
+        android:text="I like to work in teams"
+        android:textColor="@color/appTextColour"
+        android:textSize="20sp" />
+
+    <CheckBox
+        android:id="@+id/question2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/question1"
+        android:fontFamily="@font/montserrat_bold"
+        android:paddingVertical="10dp"
+        android:text="I like to teach or train people"
+        android:textColor="@color/appTextColour"
+        android:textSize="20sp" />
+
+    <CheckBox
+        android:id="@+id/question3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/question2"
+        android:fontFamily="@font/montserrat_bold"
+        android:paddingVertical="10dp"
+        android:text="I like helping people"
+        android:textColor="@color/appTextColour"
+        android:textSize="20sp" />
+
+    <CheckBox
+        android:id="@+id/question4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/question3"
+        android:fontFamily="@font/montserrat_bold"
+        android:paddingVertical="10dp"
+        android:text="I'm interested in healing people"
+        android:textColor="@color/appTextColour"
+        android:textSize="20sp" />
+
+    <CheckBox
+        android:id="@+id/question5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/question4"
+        android:fontFamily="@font/montserrat_bold"
+        android:paddingVertical="10dp"
+        android:text="I like to trying to help people solve their problems"
+        android:textColor="@color/appTextColour"
+        android:textSize="20sp" />
+
+    <CheckBox
+        android:id="@+id/question6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/question5"
+        android:fontFamily="@font/montserrat_bold"
+        android:paddingVertical="10dp"
+        android:text="I like to get into discussion about various issues"
+        android:textColor="@color/appTextColour"
+        android:textSize="20sp" />
+
+    <CheckBox
+        android:id="@+id/question7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/question6"
+        android:fontFamily="@font/montserrat_bold"
+        android:paddingVertical="10dp"
+        android:text="I enjoy learning about other cultures"
+        android:textColor="@color/appTextColour"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/nextE"
+        android:layout_width="95dp"
+        android:layout_height="48dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/button_round"
+        android:fontFamily="@font/open_sans_bold"
+        android:text="Next"
+        android:textAllCaps="false"
+        android:textColor="@color/buttonTextColour"
+        android:textSize="15sp" />
+
+    <Button
+        android:id="@+id/previousA"
+        android:layout_width="95dp"
+        android:layout_height="48dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="15dp"
+        android:layout_toLeftOf="@id/nextE"
+        android:background="@drawable/button_round"
+        android:fontFamily="@font/open_sans_bold"
+        android:text="Previous"
+        android:textAllCaps="false"
+        android:textColor="@color/buttonTextColour"
+        android:textSize="15sp" />
+
+</RelativeLayout>

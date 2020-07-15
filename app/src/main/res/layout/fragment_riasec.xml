@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context=".RiasecFrag">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/top_result"
+        android:text="Result"
+        android:fontFamily="@font/montserrat_bold"
+        android:textSize="35sp"
+        android:textColor="@color/appTextColour"
+        android:layout_centerInParent="true"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="You've matched to:"
+        android:textColor="@color/appTextColour"
+        android:layout_above="@id/top_result"
+        android:fontFamily="@font/montserrat_bold"
+        android:textSize="35sp"
+        android:layout_centerInParent="true"/>
+
+</RelativeLayout>

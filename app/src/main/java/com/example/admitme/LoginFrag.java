@@ -21,47 +21,34 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.SignInMethodQueryResult;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FirebaseFirestore;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
+import org.bson.Document;
 
-import java.util.HashMap;
-import java.util.Map;
+import io.realm.mongodb.App;
+import io.realm.mongodb.AppConfiguration;
+import io.realm.mongodb.Credentials;
+import io.realm.mongodb.User;
+import io.realm.mongodb.mongo.MongoClient;
+import io.realm.mongodb.mongo.MongoCollection;
 
-// Creates a class that is linked to the xml file
 public class LoginFrag extends Fragment {
 
     //Creates variables
-    private static final String TAG = "TAG";
     private Button homePageBTN;
     private TextInputLayout email, password;
-    private String emailStr, passwordStr, userID;
+    private String emailStr, passwordStr;
     private ProgressBar progressBar;
+    private static final String APP_ID = "admitu-dtcgi";
+    public static App app = new App(new AppConfiguration.Builder(APP_ID).build());
     private TextView forgetPassword, signUpHere;
-    private FirebaseAuth firebaseAuth;
-    private FirebaseFirestore firebaseFirestore;
-    private static String URL_LOGIN = "https://phrenological-deale.000webhostapp.com/login.php";
-    SessionManager sessionManager;
-    private FirebaseUser firebaseUser;
-    private int counter = 0;
+    private MongoClient client;
+    private MongoCollection<Document> accountsColl;
+    public Accounts account = new Accounts();
+
+    private Credentials credentials;
 
     private boolean emptyCheck(String text) {
         if (text.isEmpty()) {
@@ -100,24 +87,16 @@ public class LoginFrag extends Fragment {
         // Inflates the layout
         View v = inflater.inflate(R.layout.fragment_login, container, false);
 
-        // Calls the method to set up the user interface views
         setupUI(v);
-        sessionManager = new SessionManager(this.getContext());
 
-        // Sets an onClickListener on the button which takes the user to the home page
         homePageBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Calls the method to set up the strings
                 setupStr();
 
-                // Checks if validate email and validate password are true. Only then it will run the if, otherwise it will run the else.
                 if (validatePassword() | validateEmail()) {
-                    // Sets the progress bar's visibility to gone
                 } else {
-                    // Calls the method to login
                     login();
-                    // Sets the progress bar's visibility to gone
                 }
             }
         });
@@ -136,69 +115,54 @@ public class LoginFrag extends Fragment {
 
     private void login() {
         progressBar.setVisibility(View.VISIBLE);
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_LOGIN, new Response.Listener<String>() {
+        credentials = Credentials.emailPassword(emailStr, passwordStr);
+        app.loginAsync(credentials, new App.Callback<User>() {
             @Override
-            public void onResponse(String response) {
-                try{
-                    JSONObject jsonObject = new JSONObject(response);
-                    boolean success = jsonObject.getBoolean("success");
-                    JSONArray jsonArray = jsonObject.getJSONArray("login");
+            public void onResult(App.Result<User> result) {
+                if(result.isSuccess()){
+                    Toast.makeText(LoginFrag.this.getContext(), "Login Successful", Toast.LENGTH_SHORT).show();
+                    progressBar.setVisibility(View.GONE);
+                    client = app.currentUser().getMongoClient("mongodb-atlas");
+                    accountsColl = client.getDatabase("AdmitU").getCollection("Accounts");
 
-                    if(success){
-                        Toast.makeText(LoginFrag.this.getContext(), "Login Success!", Toast.LENGTH_SHORT).show();
+                    Task<Document> itemsTask = accountsColl.findOne(new Document("email", emailStr).append("password", passwordStr));
 
-                        for(int i = 0; i < jsonArray.length(); i++){
+                    itemsTask.addOnCompleteListener(new OnCompleteListener<Document>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Document> task) {
+                            if(task.isSuccessful()){
+                                Document doc = task.getResult();
 
-                            JSONObject object = jsonArray.getJSONObject(i);
+                                //account.set_id(doc.getString("user_id"));
+                                account.setEmail(doc.getString("email"));
+                                account.setFullName(doc.getString("full_name"));
+                                account.setPassword(doc.getString("password"));
+                                account.setFirstTimeLogin(doc.getInteger("first_time_login"));
 
-                            String email = object.getString("Email").trim();
-                            String username = object.getString("Username").trim();
-
-                            sessionManager.createSession(email, username);
-
-                            Intent gotoHomePage = new Intent(LoginFrag.this.getContext(), StartupActivity.class);
-                            gotoHomePage.putExtra("email", email);
-                            gotoHomePage.putExtra("username", username);
-                            startActivity(gotoHomePage);
+                                if(doc.getInteger("first_time_login") == 0){
+                                    goToMatchingCriteria();
+                                } else{
+                                    goToHomePage();
+                                }
+                            }
                         }
+                    });
 
-                    }else{
-                        Toast.makeText(LoginFrag.this.getContext(), "Incorrect Username or Password.", Toast.LENGTH_SHORT).show();
-                    }
-                    progressBar.setVisibility(View.GONE);
-
-                }catch(Exception e){
-                    e.printStackTrace();
-                    System.out.println(e.toString());
-                    Toast.makeText(LoginFrag.this.getContext(), "Login error! " + e.toString(), Toast.LENGTH_SHORT).show();
-                    progressBar.setVisibility(View.GONE);
+                } else{
+                    Toast.makeText(LoginFrag.this.getContext(), "Login Failed " + result.getError().getErrorMessage(), Toast.LENGTH_SHORT).show();
                 }
-
             }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(LoginFrag.this.getContext(), "Login error! " + error.toString(), Toast.LENGTH_SHORT).show();
-                progressBar.setVisibility(View.GONE);
-            }
-        })
-        {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> account = new HashMap<>();
+        });
+    }
 
-                account.put("Email", emailStr);
-                account.put("Password", passwordStr);
+    public void goToHomePage(){
+        Intent gotoHomePage = new Intent(LoginFrag.this.getContext(), StartupActivity.class);
+        startActivity(gotoHomePage);
+    }
 
-                return account;
-            }
-        };
-
-        RequestQueue requestQueue = Volley.newRequestQueue(this.getContext());
-        requestQueue.add(stringRequest);
-
-        password.getEditText().setText("");
-        email.getEditText().setText("");
+    public void goToMatchingCriteria(){
+        Intent goToMC = new Intent(LoginFrag.this.getContext(), MatchingCriteria.class);
+        startActivity(goToMC);
     }
 
     public void signUpHere(){

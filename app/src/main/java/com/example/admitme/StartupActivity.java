@@ -13,20 +13,10 @@ import java.util.HashMap;
 
 public class StartupActivity extends AppCompatActivity {
 
-    SessionManager sessionManager;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_startup);
-
-        sessionManager = new SessionManager(this);
-        sessionManager.loginStatus();
-
-        HashMap<String, String> user = sessionManager.userDetails();
-
-        System.out.println(user.get(sessionManager.USER_NAME));
-        System.out.println(user.get(sessionManager.EMAIL));
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav);
 

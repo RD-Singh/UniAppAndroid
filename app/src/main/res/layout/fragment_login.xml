@@ -49,7 +49,6 @@
             android:inputType="text"
             android:fontFamily="@font/montserrat_bold"
             android:padding="10dp"
-            android:textColor="@color/appTextColour"
             android:background="@drawable/edit_text_round" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -61,7 +60,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/email"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
         android:textColorHint="@color/appTextColour"
         app:errorEnabled="true"
         app:passwordToggleEnabled="true"
@@ -72,7 +70,6 @@
             android:layout_height="40dp"
             android:fontFamily="@font/montserrat_bold"
             android:background="@drawable/edit_text_round"
-            android:textColor="@color/appTextColour"
             android:hint="Password"
             android:inputType="textPassword"
             android:padding="10dp" />

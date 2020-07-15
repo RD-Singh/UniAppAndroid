@@ -5,6 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".SettingsFrag">
+    tools:context=".SettingsFrag"
+    android:background="@drawable/background">
+
+
+    <Button
+        android:layout_width="295dp"
+        android:layout_height="48dp"
+        android:text="Logout"
+        android:textSize="20sp"
+        android:fontFamily="@font/open_sans_bold"
+        android:background="@drawable/button_round"
+        android:textAllCaps="false"
+        android:layout_centerInParent="true"
+        android:textColor="@color/buttonTextColour"
+        android:id="@+id/logout"/>
 
 </RelativeLayout>

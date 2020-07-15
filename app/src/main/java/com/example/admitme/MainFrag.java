@@ -40,7 +40,7 @@ public class MainFrag extends Fragment {
 
     public void gotoSignIn() {
         LoginFrag loginFrag = new LoginFrag();
-        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+        FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
 
 //        fragmentTransaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_right,
 //                R.anim.enter_from_right, R.anim.exit_to_right);
@@ -51,7 +51,7 @@ public class MainFrag extends Fragment {
 
     public void gotoSignUp() {
         SignUp signUp = new SignUp();
-        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+        FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
 
 //        fragmentTransaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_right,
 //                R.anim.enter_from_right, R.anim.exit_to_right);
