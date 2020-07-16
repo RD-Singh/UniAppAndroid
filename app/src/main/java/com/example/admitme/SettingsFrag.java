@@ -50,12 +50,8 @@ public class SettingsFrag extends Fragment {
         });
     }
 
-
     private void goToLogout(){
         Intent intent = new Intent(SettingsFrag.this.getContext(), MainPage.class);
         startActivity(intent);
     }
-
-
-
 }

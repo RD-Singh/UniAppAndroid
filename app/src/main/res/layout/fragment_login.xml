@@ -48,7 +48,7 @@
             android:hint="Email"
             android:inputType="text"
             android:fontFamily="@font/montserrat_bold"
-            android:padding="10dp"
+            android:paddingLeft="10dp"
             android:background="@drawable/edit_text_round" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -72,7 +72,7 @@
             android:background="@drawable/edit_text_round"
             android:hint="Password"
             android:inputType="textPassword"
-            android:padding="10dp" />
+            android:paddingLeft="10dp"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 

@@ -14,6 +14,7 @@ import android.widget.CompoundButton;
 
 public class Social extends Fragment {
     private CheckBox question1, question2, question3, question4, question5, question6, question7;
+    public static int q1, q2, q3, q4, q5, q6, q7;
     private Button next, previous;
     public static int socialCount = 0;
 
@@ -22,13 +23,22 @@ public class Social extends Fragment {
         View v = inflater.inflate(R.layout.fragment_social, container, false);
         setupUI(v);
 
+        checkToggle(q1, question1);
+        checkToggle(q2, question2);
+        checkToggle(q3, question3);
+        checkToggle(q4, question4);
+        checkToggle(q5, question5);
+        checkToggle(q6, question6);
+        checkToggle(q7, question7);
 
         question1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
                     socialCount++;
+                    q1 = 1;
                 } else{
+                    q1 = 0;
                     if(socialCount > 0)
                         socialCount--;
                 }
@@ -40,7 +50,9 @@ public class Social extends Fragment {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
                     socialCount++;
+                    q2 = 1;
                 } else{
+                    q2 = 0;
                     if(socialCount > 0)
                         socialCount--;
                 }
@@ -52,7 +64,9 @@ public class Social extends Fragment {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
                     socialCount++;
+                    q3 = 1;
                 } else{
+                    q3 = 0;
                     if(socialCount > 0)
                         socialCount--;
                 }
@@ -64,7 +78,9 @@ public class Social extends Fragment {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
                     socialCount++;
+                    q4 = 1;
                 } else{
+                    q4 = 0;
                     if(socialCount > 0)
                         socialCount--;
                 }
@@ -76,7 +92,9 @@ public class Social extends Fragment {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
                     socialCount++;
+                    q5 = 1;
                 } else{
+                    q5 = 0;
                     if(socialCount > 0)
                         socialCount--;
                 }
@@ -88,7 +106,9 @@ public class Social extends Fragment {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
                     socialCount++;
+                    q6 = 1;
                 } else{
+                    q6 = 0;
                     if(socialCount > 0)
                         socialCount--;
                 }
@@ -100,7 +120,9 @@ public class Social extends Fragment {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
                     socialCount++;
+                    q7 = 1;
                 } else{
+                    q7 = 0;
                     if(socialCount > 0)
                         socialCount--;
                 }
@@ -110,14 +132,7 @@ public class Social extends Fragment {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                question1.setSaveEnabled(true);
-                question2.setSaveEnabled(true);
-                question3.setSaveEnabled(true);
-                question4.setSaveEnabled(true);
-                question5.setSaveEnabled(true);
-                question6.setSaveEnabled(true);
-                question7.setSaveEnabled(true);
-                System.out.println(socialCount);
+                System.out.println("Social: " +socialCount);
                 goToEnterprising();
             }
         });
@@ -125,14 +140,7 @@ public class Social extends Fragment {
         previous.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                question1.setSaveEnabled(true);
-                question2.setSaveEnabled(true);
-                question3.setSaveEnabled(true);
-                question4.setSaveEnabled(true);
-                question5.setSaveEnabled(true);
-                question6.setSaveEnabled(true);
-                question7.setSaveEnabled(true);
-                goToSocial();
+                goToArtistic();
             }
         });
 
@@ -151,10 +159,16 @@ public class Social extends Fragment {
         previous = v.findViewById(R.id.previousA);
     }
 
-    private void goToSocial(){
-        Social social = new Social();
+    private void checkToggle(int q, CheckBox checkBox){
+        if(q == 1) {
+            checkBox.toggle();
+        }
+    }
+
+    private void goToArtistic(){
+        Artistic artistic = new Artistic();
         FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.funnel_container, social);
+        fragmentTransaction.replace(R.id.funnel_container, artistic);
         fragmentTransaction.commit();
     }
 

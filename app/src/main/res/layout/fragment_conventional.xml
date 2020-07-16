@@ -83,18 +83,18 @@
         android:textColor="@color/appTextColour"
         android:textSize="20sp" />
 
-<!--    <Button-->
-<!--        android:id="@+id/nextA"-->
-<!--        android:layout_width="95dp"-->
-<!--        android:layout_height="48dp"-->
-<!--        android:layout_alignParentEnd="true"-->
-<!--        android:layout_alignParentBottom="true"-->
-<!--        android:background="@drawable/button_round"-->
-<!--        android:fontFamily="@font/open_sans_bold"-->
-<!--        android:text="Next"-->
-<!--        android:textAllCaps="false"-->
-<!--        android:textColor="@color/buttonTextColour"-->
-<!--        android:textSize="15sp" />-->
+    <Button
+        android:id="@+id/nextResult"
+        android:layout_width="95dp"
+        android:layout_height="48dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/button_round"
+        android:fontFamily="@font/open_sans_bold"
+        android:text="Next"
+        android:textAllCaps="false"
+        android:textColor="@color/buttonTextColour"
+        android:textSize="15sp" />
 
     <Button
         android:id="@+id/previousE"
@@ -104,6 +104,7 @@
         android:layout_marginRight="15dp"
         android:background="@drawable/button_round"
         android:fontFamily="@font/open_sans_bold"
+        android:layout_toLeftOf="@id/nextResult"
         android:text="Previous"
         android:textAllCaps="false"
         android:textColor="@color/buttonTextColour"

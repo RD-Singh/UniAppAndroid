@@ -15,6 +15,7 @@ import android.widget.CompoundButton;
 public class Enterprising extends Fragment {
 
     private CheckBox question1, question2, question3, question4, question5, question6, question7;
+    public static int q1, q2, q3, q4, q5, q6, q7;
     private Button next, previous;
     public static int enterprisingCount = 0;
 
@@ -23,13 +24,22 @@ public class Enterprising extends Fragment {
         View v = inflater.inflate(R.layout.fragment_enterprising, container, false);
         setupUI(v);
 
+        checkToggle(q1, question1);
+        checkToggle(q2, question2);
+        checkToggle(q3, question3);
+        checkToggle(q4, question4);
+        checkToggle(q5, question5);
+        checkToggle(q6, question6);
+        checkToggle(q7, question7);
 
         question1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
                     enterprisingCount++;
+                    q1 = 1;
                 } else{
+                    q1 = 0;
                     if(enterprisingCount > 0)
                         enterprisingCount--;
                 }
@@ -41,7 +51,9 @@ public class Enterprising extends Fragment {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
                     enterprisingCount++;
+                    q2 = 1;
                 } else{
+                    q2 = 0;
                     if(enterprisingCount > 0)
                         enterprisingCount--;
                 }
@@ -53,7 +65,9 @@ public class Enterprising extends Fragment {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
                     enterprisingCount++;
+                    q3 = 1;
                 } else{
+                    q3 = 0;
                     if(enterprisingCount > 0)
                         enterprisingCount--;
                 }
@@ -65,7 +79,9 @@ public class Enterprising extends Fragment {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
                     enterprisingCount++;
+                    q4 = 1;
                 } else{
+                    q4 = 0;
                     if(enterprisingCount > 0)
                         enterprisingCount--;
                 }
@@ -77,7 +93,9 @@ public class Enterprising extends Fragment {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
                     enterprisingCount++;
+                    q5 = 1;
                 } else{
+                    q5 = 0;
                     if(enterprisingCount > 0)
                         enterprisingCount--;
                 }
@@ -89,7 +107,9 @@ public class Enterprising extends Fragment {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
                     enterprisingCount++;
+                    q6 = 1;
                 } else{
+                    q6 = 0;
                     if(enterprisingCount > 0)
                         enterprisingCount--;
                 }
@@ -101,7 +121,9 @@ public class Enterprising extends Fragment {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
                     enterprisingCount++;
+                    q7 = 1;
                 } else{
+                    q7 = 0;
                     if(enterprisingCount > 0)
                         enterprisingCount--;
                 }
@@ -111,14 +133,7 @@ public class Enterprising extends Fragment {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                question1.setSaveEnabled(true);
-                question2.setSaveEnabled(true);
-                question3.setSaveEnabled(true);
-                question4.setSaveEnabled(true);
-                question5.setSaveEnabled(true);
-                question6.setSaveEnabled(true);
-                question7.setSaveEnabled(true);
-                System.out.println(enterprisingCount);
+                System.out.println("Enterprising: " +enterprisingCount);
                 goToConventional();
             }
         });
@@ -126,14 +141,7 @@ public class Enterprising extends Fragment {
         previous.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                question1.setSaveEnabled(true);
-                question2.setSaveEnabled(true);
-                question3.setSaveEnabled(true);
-                question4.setSaveEnabled(true);
-                question5.setSaveEnabled(true);
-                question6.setSaveEnabled(true);
-                question7.setSaveEnabled(true);
-                goToEnterprising();
+                goToSocial();
             }
         });
 
@@ -152,6 +160,12 @@ public class Enterprising extends Fragment {
         previous = v.findViewById(R.id.previousS);
     }
 
+    private void checkToggle(int q, CheckBox checkBox){
+        if(q == 1) {
+            checkBox.toggle();
+        }
+    }
+
     private void goToConventional(){
         Conventional conventional = new Conventional();
         FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
@@ -159,10 +173,10 @@ public class Enterprising extends Fragment {
         fragmentTransaction.commit();
     }
 
-    private void goToEnterprising(){
-        Enterprising enterprising = new Enterprising();
+    private void goToSocial(){
+        Social social = new Social();
         FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.funnel_container, enterprising);
+        fragmentTransaction.replace(R.id.funnel_container, social);
         fragmentTransaction.commit();
     }
 }
