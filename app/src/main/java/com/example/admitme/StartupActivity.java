@@ -3,7 +3,9 @@ package com.example.admitme;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
+import android.content.ClipData;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -32,8 +34,11 @@ public class StartupActivity extends AppCompatActivity {
             Fragment selectedFragment = null;
 
             switch (item.getItemId()) {
-                case R.id.home:
+                case R.id.home_page:
                     selectedFragment = new HomeFrag();
+                    break;
+                case R.id.matching_criteria:
+                    selectedFragment = new FunnelFrag();
                     break;
                 case R.id.settings:
                     selectedFragment = new SettingsFrag();
@@ -46,6 +51,4 @@ public class StartupActivity extends AppCompatActivity {
         }
 
     };
-
-
 }

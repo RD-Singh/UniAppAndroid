@@ -72,7 +72,7 @@
             android:background="@drawable/edit_text_round"
             android:hint="Password"
             android:inputType="textPassword"
-            android:paddingLeft="10dp"/>
+            android:paddingLeft="10dp" />
 
     </com.google.android.material.textfield.TextInputLayout>
 

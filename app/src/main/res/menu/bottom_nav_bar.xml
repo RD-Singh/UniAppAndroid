@@ -4,11 +4,16 @@
 
     <!-- Creates the home part on the bottom navigation bar -->
     <item
-        android:id="@+id/home"
+        android:id="@+id/home_page"
         android:icon="@drawable/ic_university"
         android:title="Home" />
 
     <!-- Creates the settings part on the bottom navigation bar -->
+    <item
+        android:id="@+id/matching_criteria"
+        android:icon="@drawable/ic_matching_criteria"
+        android:title="Matching Criteria" />
+
     <item
         android:id="@+id/settings"
         android:icon="@drawable/ic_settings"

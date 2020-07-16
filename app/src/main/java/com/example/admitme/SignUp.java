@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -60,6 +61,7 @@ public class SignUp extends Fragment {
     private static final Pattern PASSWORD_PATTERN = Pattern.compile("^" + "(?=.*[0-9])" + "(?=.*[a-zA-Z])" + "(?=.*[@#$%^&+=*])" + "(?=\\S+$)" + ".{4,}" + "$");
 
     private Button gotoLogin;
+    private TextView loginHere;
 
     private MongoClient client;
     LoginFrag loginFrag = new LoginFrag();
@@ -169,7 +171,7 @@ public class SignUp extends Fragment {
         SignUp signUp = new SignUp();
         LoginFrag loginFrag = new LoginFrag();
         FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction().remove(signUp);
-
+        fragmentTransaction.setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right, R.anim.enter_from_left, R.anim.exit_to_right);
         fragmentTransaction.replace(R.id.fragment_container, loginFrag);
         fragmentTransaction.commit();
     }
@@ -195,6 +197,14 @@ public class SignUp extends Fragment {
                 }
             }
         });
+
+        loginHere.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                gotoLogin();
+            }
+        });
+
         return v;
     }
 
@@ -270,5 +280,6 @@ public class SignUp extends Fragment {
         confirmPassword = v.findViewById(R.id.confirm_password);
         gotoLogin = v.findViewById(R.id.sign_up);
         progressBar = v.findViewById(R.id.signUpProgressBar);
+        loginHere = v.findViewById(R.id.login_here);
     }
 }

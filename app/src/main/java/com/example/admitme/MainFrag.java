@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
@@ -41,10 +42,7 @@ public class MainFrag extends Fragment {
     public void gotoSignIn() {
         LoginFrag loginFrag = new LoginFrag();
         FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
-
-//        fragmentTransaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_right,
-//                R.anim.enter_from_right, R.anim.exit_to_right);
-
+        fragmentTransaction.setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right, R.anim.enter_from_left, R.anim.exit_to_right);
         fragmentTransaction.replace(R.id.fragment_container, loginFrag);
         fragmentTransaction.commit();
     }
@@ -52,10 +50,7 @@ public class MainFrag extends Fragment {
     public void gotoSignUp() {
         SignUp signUp = new SignUp();
         FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
-
-//        fragmentTransaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_right,
-//                R.anim.enter_from_right, R.anim.exit_to_right);
-
+        fragmentTransaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_right, R.anim.exit_to_left);
         fragmentTransaction.replace(R.id.fragment_container, signUp);
         fragmentTransaction.commit();
     }

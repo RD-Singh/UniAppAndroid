@@ -169,6 +169,7 @@ public class LoginFrag extends Fragment {
 
         SignUp signUp = new SignUp();
         FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
+        fragmentTransaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_right, R.anim.exit_to_left);
         fragmentTransaction.replace(R.id.fragment_container, signUp);
         fragmentTransaction.commit();
 
