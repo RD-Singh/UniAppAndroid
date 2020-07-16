@@ -169,6 +169,7 @@ public class Investigative extends Fragment {
     private void goToRealistic(){
         Realistic realistic = new Realistic();
         FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
+        fragmentTransaction.setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right, R.anim.enter_from_left, R.anim.exit_to_right);
         fragmentTransaction.replace(R.id.funnel_container, realistic);
         fragmentTransaction.commit();
     }
@@ -176,6 +177,7 @@ public class Investigative extends Fragment {
     private void goToArtistic(){
         Artistic artistic = new Artistic();
         FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
+        fragmentTransaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_right, R.anim.exit_to_left);
         fragmentTransaction.replace(R.id.funnel_container, artistic);
         fragmentTransaction.commit();
     }

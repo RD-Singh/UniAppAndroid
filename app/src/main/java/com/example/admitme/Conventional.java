@@ -172,6 +172,7 @@ public class Conventional extends Fragment {
     private void goToEnterprising(){
         Enterprising enterprising = new Enterprising();
         FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
+        fragmentTransaction.setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right, R.anim.enter_from_left, R.anim.exit_to_right);
         fragmentTransaction.replace(R.id.funnel_container, enterprising);
         fragmentTransaction.commit();
     }
@@ -179,6 +180,7 @@ public class Conventional extends Fragment {
     private void goToRIASEC(){
         RiasecFrag riasec = new RiasecFrag();
         FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
+        fragmentTransaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_right, R.anim.exit_to_left);
         fragmentTransaction.replace(R.id.funnel_container, riasec);
         fragmentTransaction.commit();
     }

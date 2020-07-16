@@ -15,6 +15,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -93,7 +95,6 @@ public class LoginFrag extends Fragment {
             @Override
             public void onClick(View v) {
                 setupStr();
-
                 if (validatePassword() | validateEmail()) {
                 } else {
                     login();
@@ -158,11 +159,13 @@ public class LoginFrag extends Fragment {
     public void goToHomePage(){
         Intent gotoHomePage = new Intent(LoginFrag.this.getContext(), StartupActivity.class);
         startActivity(gotoHomePage);
+        getActivity().overridePendingTransition(R.anim.enter_from_left, R.anim.exit_to_right);
     }
 
     public void goToMatchingCriteria(){
         Intent goToMC = new Intent(LoginFrag.this.getContext(), MatchingCriteria.class);
         startActivity(goToMC);
+        getActivity().overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
     }
 
     public void signUpHere(){

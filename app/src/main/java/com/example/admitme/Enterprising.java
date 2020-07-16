@@ -166,17 +166,19 @@ public class Enterprising extends Fragment {
         }
     }
 
-    private void goToConventional(){
-        Conventional conventional = new Conventional();
-        FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.funnel_container, conventional);
-        fragmentTransaction.commit();
-    }
-
     private void goToSocial(){
         Social social = new Social();
         FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
+        fragmentTransaction.setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right, R.anim.enter_from_left, R.anim.exit_to_right);
         fragmentTransaction.replace(R.id.funnel_container, social);
+        fragmentTransaction.commit();
+    }
+
+    private void goToConventional(){
+        Conventional conventional = new Conventional();
+        FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
+        fragmentTransaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_right, R.anim.exit_to_left);
+        fragmentTransaction.replace(R.id.funnel_container, conventional);
         fragmentTransaction.commit();
     }
 }

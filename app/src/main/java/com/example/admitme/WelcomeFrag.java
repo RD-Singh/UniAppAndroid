@@ -31,6 +31,7 @@ public class WelcomeFrag extends Fragment {
     public void goToRealistic(){
         Realistic realistic = new Realistic();
         FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
+        fragmentTransaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_right, R.anim.exit_to_left);
         fragmentTransaction.replace(R.id.funnel_container, realistic);
         fragmentTransaction.commit();
     }

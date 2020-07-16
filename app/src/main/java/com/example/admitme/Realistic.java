@@ -162,6 +162,7 @@ public class Realistic extends Fragment {
     private void goToInvestigative(){
         Investigative investigative = new Investigative();
         FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
+        fragmentTransaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_right, R.anim.exit_to_left);
         fragmentTransaction.replace(R.id.funnel_container, investigative);
         fragmentTransaction.commit();
     }

@@ -16,7 +16,7 @@
         android:layout_height="173dp"
         android:layout_above="@id/login_AdmitU"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/admitme_logo_placeholder" />
+        android:src="@drawable/admitu_logo_placeholder" />
 
     <!-- Creates the name of the app -->
     <TextView
@@ -112,7 +112,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/forgetPassword"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp"
+        android:padding="15dp"
         android:text="Don't have an account? Sign up."
         android:textColor="@color/appTextColour"
         android:textSize="15sp" />
@@ -125,7 +125,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/sign_up_here"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp"
         android:indeterminateDrawable="@drawable/progress"
         android:visibility="invisible" />
 

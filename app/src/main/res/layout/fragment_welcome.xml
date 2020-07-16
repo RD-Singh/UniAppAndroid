@@ -12,7 +12,7 @@
         android:layout_height="173dp"
         android:layout_above="@id/login_AdmitU"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/admitme_logo_placeholder" />
+        android:src="@drawable/admitu_logo_placeholder" />
 
     <TextView
         android:id="@+id/login_AdmitU"
