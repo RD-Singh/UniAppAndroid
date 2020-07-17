@@ -1,5 +1,5 @@
 // Creates the package for the app
-package com.example.admitme;
+package com.example.admitme.Main;
 
 // Imports the methods needed in the java class
 import android.app.Dialog;
@@ -7,14 +7,13 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
-import java.util.ArrayList;
+import com.example.admitme.R;
 
 // Creates a class that is linked to the xml file
 public class HomeFrag extends Fragment {

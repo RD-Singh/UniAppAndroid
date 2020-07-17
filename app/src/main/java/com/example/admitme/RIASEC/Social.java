@@ -1,4 +1,4 @@
-package com.example.admitme;
+package com.example.admitme.RIASEC;
 
 import android.os.Bundle;
 
@@ -12,16 +12,17 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 
-public class Investigative extends Fragment {
+import com.example.admitme.R;
 
+public class Social extends Fragment {
     private CheckBox question1, question2, question3, question4, question5, question6, question7;
     public static int q1, q2, q3, q4, q5, q6, q7;
     private Button next, previous;
-    public static int investigateCount = 0;
+    public static int socialCount = 0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_investigative, container, false);
+        View v = inflater.inflate(R.layout.fragment_social, container, false);
         setupUI(v);
 
         checkToggle(q1, question1);
@@ -36,12 +37,12 @@ public class Investigative extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
-                    investigateCount++;
-                q1 = 1;
+                    socialCount++;
+                    q1 = 1;
                 } else{
                     q1 = 0;
-                    if(investigateCount > 0)
-                        investigateCount--;
+                    if(socialCount > 0)
+                        socialCount--;
                 }
             }
         });
@@ -50,12 +51,12 @@ public class Investigative extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
-                    investigateCount++;
-                q2 = 1;
+                    socialCount++;
+                    q2 = 1;
                 } else{
                     q2 = 0;
-                    if(investigateCount > 0)
-                        investigateCount--;
+                    if(socialCount > 0)
+                        socialCount--;
                 }
             }
         });
@@ -64,12 +65,12 @@ public class Investigative extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
-                    investigateCount++;
-                q3 = 1;
+                    socialCount++;
+                    q3 = 1;
                 } else{
                     q3 = 0;
-                    if(investigateCount > 0)
-                        investigateCount--;
+                    if(socialCount > 0)
+                        socialCount--;
                 }
             }
         });
@@ -78,12 +79,12 @@ public class Investigative extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
-                    investigateCount++;
-                q4 = 1;
+                    socialCount++;
+                    q4 = 1;
                 } else{
                     q4 = 0;
-                    if(investigateCount > 0)
-                        investigateCount--;
+                    if(socialCount > 0)
+                        socialCount--;
                 }
             }
         });
@@ -92,12 +93,12 @@ public class Investigative extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
-                    investigateCount++;
-                q5 = 1;
+                    socialCount++;
+                    q5 = 1;
                 } else{
                     q5 = 0;
-                    if(investigateCount > 0)
-                        investigateCount--;
+                    if(socialCount > 0)
+                        socialCount--;
                 }
             }
         });
@@ -106,12 +107,12 @@ public class Investigative extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
-                    investigateCount++;
-                q6 = 1;
+                    socialCount++;
+                    q6 = 1;
                 } else{
                     q6 = 0;
-                    if(investigateCount > 0)
-                        investigateCount--;
+                    if(socialCount > 0)
+                        socialCount--;
                 }
             }
         });
@@ -120,12 +121,12 @@ public class Investigative extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
-                    investigateCount++;
-                q7 = 1;
+                    socialCount++;
+                    q7 = 1;
                 } else{
                     q7 = 0;
-                    if(investigateCount > 0)
-                        investigateCount--;
+                    if(socialCount > 0)
+                        socialCount--;
                 }
             }
         });
@@ -133,15 +134,15 @@ public class Investigative extends Fragment {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("Investigative: " +investigateCount);
-                goToArtistic();
+                System.out.println("Social: " +socialCount);
+                goToEnterprising();
             }
         });
 
         previous.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                goToRealistic();
+                goToArtistic();
             }
         });
 
@@ -156,8 +157,8 @@ public class Investigative extends Fragment {
         question5 = v.findViewById(R.id.question5);
         question6 = v.findViewById(R.id.question6);
         question7 = v.findViewById(R.id.question7);
-        next = v.findViewById(R.id.nextA);
-        previous = v.findViewById(R.id.previousR);
+        next = v.findViewById(R.id.nextE);
+        previous = v.findViewById(R.id.previousA);
     }
 
     private void checkToggle(int q, CheckBox checkBox){
@@ -166,19 +167,19 @@ public class Investigative extends Fragment {
         }
     }
 
-    private void goToRealistic(){
-        Realistic realistic = new Realistic();
-        FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
-        fragmentTransaction.setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right, R.anim.enter_from_left, R.anim.exit_to_right);
-        fragmentTransaction.replace(R.id.funnel_container, realistic);
-        fragmentTransaction.commit();
-    }
-
     private void goToArtistic(){
         Artistic artistic = new Artistic();
         FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
-        fragmentTransaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_right, R.anim.exit_to_left);
+        fragmentTransaction.setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right, R.anim.enter_from_left, R.anim.exit_to_right);
         fragmentTransaction.replace(R.id.funnel_container, artistic);
+        fragmentTransaction.commit();
+    }
+
+    private void goToEnterprising(){
+        Enterprising enterprising = new Enterprising();
+        FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
+        fragmentTransaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_right, R.anim.exit_to_left);
+        fragmentTransaction.replace(R.id.funnel_container, enterprising);
         fragmentTransaction.commit();
     }
 }

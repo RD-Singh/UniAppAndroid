@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/background"
     android:orientation="vertical"
-    tools:context=".HomeFrag">
+    tools:context=".Main.HomeFrag">
 
     <LinearLayout
         android:id="@+id/university_one"

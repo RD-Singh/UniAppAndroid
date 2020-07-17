@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/background"
     android:padding="25dp"
-    tools:context=".Conventional">
+    tools:context=".RIASEC.Conventional">
 
     <CheckBox
         android:id="@+id/question1"

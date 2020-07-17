@@ -1,4 +1,4 @@
-package com.example.admitme;
+package com.example.admitme.RIASEC;
 
 import android.os.Bundle;
 
@@ -11,6 +11,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+
+import com.example.admitme.R;
+import com.example.admitme.RIASEC.Conventional;
+import com.example.admitme.RIASEC.Social;
 
 public class Enterprising extends Fragment {
 

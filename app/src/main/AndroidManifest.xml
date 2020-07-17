@@ -9,16 +9,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainPage"
-            android:noHistory="true"/>
-        <activity
-            android:name=".MatchingCriteria"
+        <activity android:name=".LoginRegister.MainPage"
             android:noHistory="true" />
         <activity
-            android:name=".StartupActivity"
+            android:name=".Funnel.MatchingCriteria"
             android:noHistory="true" />
         <activity
-            android:name=".SplashScreen"
+            android:name=".Main.StartupActivity"
+            android:noHistory="true" />
+        <activity
+            android:name=".Main.SplashScreen"
             android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

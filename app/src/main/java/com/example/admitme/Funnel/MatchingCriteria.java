@@ -1,12 +1,11 @@
-package com.example.admitme;
+package com.example.admitme.Funnel;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
 import android.os.Bundle;
 
-
-import java.util.HashMap;
+import com.example.admitme.R;
 
 public class MatchingCriteria extends AppCompatActivity {
 

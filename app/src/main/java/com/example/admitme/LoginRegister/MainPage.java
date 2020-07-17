@@ -1,16 +1,13 @@
-package com.example.admitme;
+package com.example.admitme.LoginRegister;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.os.Bundle;
 
-import android.view.View;
+import com.example.admitme.R;
 
 import io.realm.Realm;
-import io.realm.mongodb.App;
-import io.realm.mongodb.AppConfiguration;
+
 
 public class MainPage extends AppCompatActivity {
 
@@ -18,6 +15,7 @@ public class MainPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_page);
+        overridePendingTransition(R.anim.fade_in,0);
 
         Realm.init(this);
 

@@ -1,4 +1,4 @@
-package com.example.admitme;
+package com.example.admitme.RIASEC;
 
 import android.os.Bundle;
 
@@ -8,14 +8,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.admitme.R;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 
 public class RiasecFrag extends Fragment {
 
     public static ArrayList<Integer> riasec = new ArrayList<>();
     public static int first, second, third;
+    private List<String> realistic;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

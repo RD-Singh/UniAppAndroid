@@ -1,4 +1,4 @@
-package com.example.admitme;
+package com.example.admitme.RIASEC;
 
 import android.os.Bundle;
 
@@ -12,16 +12,18 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 
-public class Conventional extends Fragment {
+import com.example.admitme.R;
+
+public class Investigative extends Fragment {
 
     private CheckBox question1, question2, question3, question4, question5, question6, question7;
     public static int q1, q2, q3, q4, q5, q6, q7;
     private Button next, previous;
-    public static int conventionalCount = 0;
+    public static int investigateCount = 0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_conventional, container, false);
+        View v = inflater.inflate(R.layout.fragment_investigative, container, false);
         setupUI(v);
 
         checkToggle(q1, question1);
@@ -36,12 +38,12 @@ public class Conventional extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
-                    conventionalCount++;
-                    q1 = 1;
+                    investigateCount++;
+                q1 = 1;
                 } else{
                     q1 = 0;
-                    if(conventionalCount > 0)
-                        conventionalCount--;
+                    if(investigateCount > 0)
+                        investigateCount--;
                 }
             }
         });
@@ -50,12 +52,12 @@ public class Conventional extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
-                    conventionalCount++;
-                    q2 = 1;
+                    investigateCount++;
+                q2 = 1;
                 } else{
                     q2 = 0;
-                    if(conventionalCount > 0)
-                        conventionalCount--;
+                    if(investigateCount > 0)
+                        investigateCount--;
                 }
             }
         });
@@ -64,12 +66,12 @@ public class Conventional extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
-                    conventionalCount++;
-                    q3 = 1;
+                    investigateCount++;
+                q3 = 1;
                 } else{
                     q3 = 0;
-                    if(conventionalCount > 0)
-                        conventionalCount--;
+                    if(investigateCount > 0)
+                        investigateCount--;
                 }
             }
         });
@@ -78,12 +80,12 @@ public class Conventional extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
-                    conventionalCount++;
-                    q4 = 1;
+                    investigateCount++;
+                q4 = 1;
                 } else{
                     q4 = 0;
-                    if(conventionalCount > 0)
-                        conventionalCount--;
+                    if(investigateCount > 0)
+                        investigateCount--;
                 }
             }
         });
@@ -92,12 +94,12 @@ public class Conventional extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
-                    conventionalCount++;
-                    q5 = 1;
+                    investigateCount++;
+                q5 = 1;
                 } else{
                     q5 = 0;
-                    if(conventionalCount > 0)
-                        conventionalCount--;
+                    if(investigateCount > 0)
+                        investigateCount--;
                 }
             }
         });
@@ -106,12 +108,12 @@ public class Conventional extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
-                    conventionalCount++;
-                    q6 = 1;
+                    investigateCount++;
+                q6 = 1;
                 } else{
                     q6 = 0;
-                    if(conventionalCount > 0)
-                        conventionalCount--;
+                    if(investigateCount > 0)
+                        investigateCount--;
                 }
             }
         });
@@ -120,41 +122,32 @@ public class Conventional extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
-                    conventionalCount++;
-                    q7 = 1;
+                    investigateCount++;
+                q7 = 1;
                 } else{
                     q7 = 0;
-                    if(conventionalCount > 0)
-                        conventionalCount--;
+                    if(investigateCount > 0)
+                        investigateCount--;
                 }
-            }
-        });
-
-
-        previous.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                goToEnterprising();
             }
         });
 
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("Conventional: " + conventionalCount);
-                goToRIASEC();
+                System.out.println("Investigative: " +investigateCount);
+                goToArtistic();
             }
         });
 
-
+        previous.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToRealistic();
+            }
+        });
 
         return v;
-    }
-
-    private void checkToggle(int q, CheckBox checkBox){
-        if(q == 1) {
-            checkBox.toggle();
-        }
     }
 
     private void setupUI(View v){
@@ -165,23 +158,29 @@ public class Conventional extends Fragment {
         question5 = v.findViewById(R.id.question5);
         question6 = v.findViewById(R.id.question6);
         question7 = v.findViewById(R.id.question7);
-        previous = v.findViewById(R.id.previousE);
-        next = v.findViewById(R.id.nextResult);
+        next = v.findViewById(R.id.nextA);
+        previous = v.findViewById(R.id.previousR);
     }
 
-    private void goToEnterprising(){
-        Enterprising enterprising = new Enterprising();
+    private void checkToggle(int q, CheckBox checkBox){
+        if(q == 1) {
+            checkBox.toggle();
+        }
+    }
+
+    private void goToRealistic(){
+        Realistic realistic = new Realistic();
         FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
         fragmentTransaction.setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right, R.anim.enter_from_left, R.anim.exit_to_right);
-        fragmentTransaction.replace(R.id.funnel_container, enterprising);
+        fragmentTransaction.replace(R.id.funnel_container, realistic);
         fragmentTransaction.commit();
     }
 
-    private void goToRIASEC(){
-        RiasecFrag riasec = new RiasecFrag();
+    private void goToArtistic(){
+        Artistic artistic = new Artistic();
         FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
         fragmentTransaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_right, R.anim.exit_to_left);
-        fragmentTransaction.replace(R.id.funnel_container, riasec);
+        fragmentTransaction.replace(R.id.funnel_container, artistic);
         fragmentTransaction.commit();
     }
 }

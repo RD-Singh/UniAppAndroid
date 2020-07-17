@@ -1,9 +1,7 @@
 // Creates the package for the app
-package com.example.admitme;
+package com.example.admitme.LoginRegister;
 
 // Imports the methods needed in the java class
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -11,18 +9,18 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.admitme.Funnel.MatchingCriteria;
+import com.example.admitme.POJO.Accounts;
+import com.example.admitme.R;
+import com.example.admitme.Main.StartupActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
@@ -159,13 +157,11 @@ public class LoginFrag extends Fragment {
     public void goToHomePage(){
         Intent gotoHomePage = new Intent(LoginFrag.this.getContext(), StartupActivity.class);
         startActivity(gotoHomePage);
-        getActivity().overridePendingTransition(R.anim.enter_from_left, R.anim.exit_to_right);
     }
 
     public void goToMatchingCriteria(){
         Intent goToMC = new Intent(LoginFrag.this.getContext(), MatchingCriteria.class);
         startActivity(goToMC);
-        getActivity().overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left);
     }
 
     public void signUpHere(){

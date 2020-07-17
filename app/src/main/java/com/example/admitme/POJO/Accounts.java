@@ -1,4 +1,4 @@
-package com.example.admitme;
+package com.example.admitme.POJO;
 
 import org.bson.types.ObjectId;
 

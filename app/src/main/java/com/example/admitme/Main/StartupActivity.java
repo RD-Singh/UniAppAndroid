@@ -1,17 +1,15 @@
-package com.example.admitme;
+package com.example.admitme.Main;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
-import android.content.ClipData;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.example.admitme.Funnel.FunnelFrag;
+import com.example.admitme.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-import java.util.HashMap;
 
 public class StartupActivity extends AppCompatActivity {
 
