@@ -135,7 +135,6 @@ public class Investigative extends Fragment {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("Investigative: " +investigateCount);
                 goToArtistic();
             }
         });

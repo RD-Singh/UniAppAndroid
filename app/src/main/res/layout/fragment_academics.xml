@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context=".Funnel.AcademicsFrag">
+
+    <TextView
+        android:id="@+id/academics_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:fontFamily="@font/montserrat_bold"
+        android:gravity="center"
+        android:lineSpacingMultiplier="0.9"
+        android:text="@string/academics_description"
+        android:textColor="@color/appTextColour"
+        android:textSize="18sp" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/academics_description"
+        android:layout_above="@id/addSubject"
+        android:layout_marginBottom="8dp"
+        android:scrollbars="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <AutoCompleteTextView
+                android:id="@+id/subject1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:inputType="none"
+                android:text="English"
+                android:layout_marginTop="10dp"
+                android:completionThreshold="1"
+                android:ems="7"
+                android:fontFamily="@font/open_sans_bold"
+                android:textSize="18sp" />
+
+            <EditText
+                android:layout_width="70dp"
+                android:layout_height="40dp"
+                android:background="@drawable/edit_text_round"
+                android:hint="%"
+                android:gravity="center"
+                android:inputType="number"
+                android:fontFamily="@font/montserrat_bold"
+                android:textSize="15sp"
+                android:maxLength="3"
+                android:id="@+id/mark1"
+                android:layout_toRightOf="@id/subject1"
+                android:layout_marginLeft="80dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="17dp"/>
+
+            <AutoCompleteTextView
+                android:id="@+id/subject2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/subject1"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+                android:completionThreshold="1"
+                android:inputType="none"
+                android:text="Pre-Calculus"
+                android:ems="7"
+                android:fontFamily="@font/open_sans_bold"
+                android:hint="Select a Subject"
+                android:textSize="18sp" />
+
+            <EditText
+                android:layout_width="70dp"
+                android:layout_height="40dp"
+                android:background="@drawable/edit_text_round"
+                android:hint="%"
+                android:gravity="center"
+                android:inputType="number"
+                android:fontFamily="@font/montserrat_bold"
+                android:textSize="15sp"
+                android:maxLength="3"
+                android:id="@+id/mark2"
+                android:layout_toRightOf="@id/subject1"
+                android:layout_marginLeft="80dp"
+                android:layout_below="@id/mark1"
+                android:layout_marginTop="14dp"/>
+
+            <AutoCompleteTextView
+                android:id="@+id/subject3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/subject2"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+                android:completionThreshold="1"
+                android:fontFamily="@font/open_sans_bold"
+                android:hint="Select a Subject"
+                android:textSize="18sp" />
+
+            <EditText
+                android:layout_width="70dp"
+                android:layout_height="40dp"
+                android:background="@drawable/edit_text_round"
+                android:hint="%"
+                android:gravity="center"
+                android:inputType="number"
+                android:fontFamily="@font/montserrat_bold"
+                android:textSize="15sp"
+                android:maxLength="3"
+                android:id="@+id/mark3"
+                android:layout_toRightOf="@id/subject1"
+                android:layout_marginLeft="80dp"
+                android:layout_below="@id/mark2"
+                android:layout_marginTop="14dp"/>
+
+            <AutoCompleteTextView
+                android:id="@+id/subject4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/subject3"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+                android:completionThreshold="1"
+                android:fontFamily="@font/open_sans_bold"
+                android:hint="Select a Subject"
+                android:textSize="18sp" />
+
+            <EditText
+                android:layout_width="70dp"
+                android:layout_height="40dp"
+                android:background="@drawable/edit_text_round"
+                android:hint="%"
+                android:gravity="center"
+                android:inputType="number"
+                android:maxLength="3"
+                android:id="@+id/mark4"
+                android:fontFamily="@font/montserrat_bold"
+                android:textSize="15sp"
+                android:layout_toRightOf="@id/subject1"
+                android:layout_marginLeft="80dp"
+                android:layout_below="@id/mark3"
+                android:layout_marginTop="14dp"/>
+
+            <AutoCompleteTextView
+                android:id="@+id/subject5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/subject4"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
+                android:completionThreshold="1"
+                android:fontFamily="@font/open_sans_bold"
+                android:visibility="gone"
+                android:hint="Select a Subject"
+                android:textSize="18sp" />
+
+            <EditText
+                android:layout_width="70dp"
+                android:layout_height="40dp"
+                android:background="@drawable/edit_text_round"
+                android:hint="%"
+                android:gravity="center"
+                android:inputType="number"
+                android:fontFamily="@font/montserrat_bold"
+                android:textSize="15sp"
+                android:maxLength="3"
+                android:id="@+id/mark5"
+                android:visibility="gone"
+                android:layout_toRightOf="@id/subject1"
+                android:layout_marginLeft="80dp"
+                android:layout_below="@id/mark4"
+                android:layout_marginTop="14dp"/>
+
+            <AutoCompleteTextView
+                android:id="@+id/subject6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/subject5"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+                android:completionThreshold="1"
+                android:visibility="gone"
+                android:fontFamily="@font/open_sans_bold"
+                android:hint="Select a Subject"
+                android:textSize="18sp" />
+
+            <EditText
+                android:layout_width="70dp"
+                android:layout_height="40dp"
+                android:background="@drawable/edit_text_round"
+                android:hint="%"
+                android:gravity="center"
+                android:inputType="number"
+                android:fontFamily="@font/montserrat_bold"
+                android:textSize="15sp"
+                android:maxLength="3"
+                android:id="@+id/mark6"
+                android:visibility="gone"
+                android:layout_toRightOf="@id/subject1"
+                android:layout_marginLeft="80dp"
+                android:layout_below="@id/mark5"
+                android:layout_marginTop="16dp"/>
+
+            <AutoCompleteTextView
+                android:id="@+id/subject7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/subject6"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+                android:visibility="gone"
+                android:completionThreshold="1"
+                android:fontFamily="@font/open_sans_bold"
+                android:hint="Select a Subject"
+                android:textSize="18sp" />
+
+            <EditText
+                android:layout_width="70dp"
+                android:layout_height="40dp"
+                android:background="@drawable/edit_text_round"
+                android:hint="%"
+                android:gravity="center"
+                android:inputType="number"
+                android:fontFamily="@font/montserrat_bold"
+                android:textSize="15sp"
+                android:maxLength="3"
+                android:id="@+id/mark7"
+                android:visibility="gone"
+                android:layout_toRightOf="@id/subject1"
+                android:layout_marginLeft="80dp"
+                android:layout_below="@id/mark6"
+                android:layout_marginTop="16dp"/>
+
+            <AutoCompleteTextView
+                android:id="@+id/subject8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/subject7"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+                android:completionThreshold="1"
+                android:visibility="gone"
+                android:fontFamily="@font/open_sans_bold"
+                android:hint="Select a Subject"
+                android:textSize="18sp" />
+
+            <EditText
+                android:layout_width="70dp"
+                android:layout_height="40dp"
+                android:background="@drawable/edit_text_round"
+                android:hint="%"
+                android:gravity="center"
+                android:inputType="number"
+                android:visibility="gone"
+                android:fontFamily="@font/montserrat_bold"
+                android:textSize="15sp"
+                android:maxLength="3"
+                android:id="@+id/mark8"
+                android:layout_toRightOf="@id/subject1"
+                android:layout_marginLeft="80dp"
+                android:layout_below="@id/mark7"
+                android:layout_marginTop="16dp"/>
+
+
+        </RelativeLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/submit_academics"
+        android:layout_width="295dp"
+        android:layout_height="48dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/button_round"
+        android:fontFamily="@font/open_sans_bold"
+        android:text="Submit"
+        android:textAllCaps="false"
+        android:textColor="@color/buttonTextColour"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/anchor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@id/submit_academics"/>
+
+    <Button
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:background="@drawable/button_round"
+        android:text="Add a Subject"
+        android:textAllCaps="false"
+        android:fontFamily="@font/open_sans_bold"
+        android:textColor="@color/buttonTextColour"
+        android:textSize="15sp"
+        android:id="@+id/addSubject"
+        android:layout_above="@id/submit_academics"
+        android:layout_toEndOf="@id/anchor"
+        android:layout_marginBottom="15dp"
+        android:layout_marginStart="10dp"/>
+
+    <Button
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:background="@drawable/button_round"
+        android:text="Remove a Subject"
+        android:textAllCaps="false"
+        android:fontFamily="@font/open_sans_bold"
+        android:textColor="@color/buttonTextColour"
+        android:textSize="15sp"
+        android:id="@+id/removeSubject"
+        android:layout_above="@id/submit_academics"
+        android:layout_toStartOf="@id/anchor"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="15dp"/>
+</RelativeLayout>

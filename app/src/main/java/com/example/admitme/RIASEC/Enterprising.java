@@ -137,7 +137,6 @@ public class Enterprising extends Fragment {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("Enterprising: " +enterprisingCount);
                 goToConventional();
             }
         });

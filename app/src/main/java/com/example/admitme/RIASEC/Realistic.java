@@ -136,7 +136,6 @@ public class Realistic extends Fragment {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("Realistic: " +realisticCount);
                 goToInvestigative();
             }
         });

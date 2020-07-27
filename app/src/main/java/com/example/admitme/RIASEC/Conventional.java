@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 
+import com.example.admitme.Funnel.AcademicsFrag;
 import com.example.admitme.R;
 
 public class Conventional extends Fragment {
@@ -143,8 +144,7 @@ public class Conventional extends Fragment {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("Conventional: " + conventionalCount);
-                goToRIASEC();
+                goToAcademic();
             }
         });
 
@@ -179,11 +179,13 @@ public class Conventional extends Fragment {
         fragmentTransaction.commit();
     }
 
-    private void goToRIASEC(){
-        RiasecFrag riasec = new RiasecFrag();
+    private void goToAcademic(){
+        AcademicsFrag academicsFrag = new AcademicsFrag();
         FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
         fragmentTransaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_right, R.anim.exit_to_left);
-        fragmentTransaction.replace(R.id.funnel_container, riasec);
+        fragmentTransaction.replace(R.id.funnel_container, academicsFrag);
         fragmentTransaction.commit();
     }
+
+
 }

@@ -33,6 +33,8 @@ import io.realm.mongodb.Credentials;
 import io.realm.mongodb.User;
 import io.realm.mongodb.mongo.MongoClient;
 import io.realm.mongodb.mongo.MongoCollection;
+import io.realm.mongodb.mongo.iterable.FindIterable;
+import io.realm.mongodb.mongo.iterable.MongoCursor;
 
 public class LoginFrag extends Fragment {
 
@@ -45,7 +47,7 @@ public class LoginFrag extends Fragment {
     public static App app = new App(new AppConfiguration.Builder(APP_ID).build());
     private TextView forgetPassword, signUpHere;
     private MongoClient client;
-    private MongoCollection<Document> accountsColl;
+    private MongoCollection<Document> accountsColl, uniCollection;
     public Accounts account = new Accounts();
 
     private Credentials credentials;
@@ -88,6 +90,7 @@ public class LoginFrag extends Fragment {
         View v = inflater.inflate(R.layout.fragment_login, container, false);
 
         setupUI(v);
+        client = app.currentUser().getMongoClient("mongodb-atlas");
 
         homePageBTN.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,9 +106,7 @@ public class LoginFrag extends Fragment {
         signUpHere.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 signUpHere();
-
             }
         });
 
@@ -121,7 +122,6 @@ public class LoginFrag extends Fragment {
                 if(result.isSuccess()){
                     Toast.makeText(LoginFrag.this.getContext(), "Login Successful", Toast.LENGTH_SHORT).show();
                     progressBar.setVisibility(View.GONE);
-                    client = app.currentUser().getMongoClient("mongodb-atlas");
                     accountsColl = client.getDatabase("AdmitU").getCollection("Accounts");
 
                     Task<Document> itemsTask = accountsColl.findOne(new Document("email", emailStr).append("password", passwordStr));

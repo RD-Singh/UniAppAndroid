@@ -15,11 +15,11 @@ public class MatchingCriteria extends AppCompatActivity {
         setContentView(R.layout.activity_matching_criteria);
 
         WelcomeFrag welcomeFrag = new WelcomeFrag();
+        FunnelPreferencesFrag funnelPreferencesFrag = new FunnelPreferencesFrag();
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
-                .add(R.id.funnel_container, welcomeFrag)
+                .add(R.id.funnel_container, funnelPreferencesFrag)
                 .commit();
-
     }
 }

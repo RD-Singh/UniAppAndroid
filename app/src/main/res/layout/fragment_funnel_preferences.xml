@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Funnel.FunnelPreferencesFrag"
+    android:background="@drawable/background">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat_bold"
+        android:textColor="@color/appTextColour"
+        android:textAllCaps="false"
+        android:id="@+id/period_of_study_question"
+        android:text="How long do you intend on staying in school?"
+        android:textSize="25sp"
+        android:gravity="center"
+        android:layout_margin="15dp"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edit_text_round"/>
+
+    <RadioButton
+        android:id="@+id/less_year"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Less than a year"
+        android:fontFamily="@font/montserrat_bold"
+        android:textColor="@color/appTextColour"
+        android:textSize="14sp"
+        android:layout_below="@id/period_of_study_question"
+        android:layout_marginLeft="5dp"/>
+
+    <RadioButton
+        android:id="@+id/one_two_year"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1-2 years"
+        android:fontFamily="@font/montserrat_bold"
+        android:textColor="@color/appTextColour"
+        android:textSize="14sp"
+        android:layout_below="@id/period_of_study_question"
+        android:layout_toRightOf="@id/less_year"/>
+
+    <RadioButton
+        android:id="@+id/more_two_year"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="More than 2 years"
+        android:fontFamily="@font/montserrat_bold"
+        android:textColor="@color/appTextColour"
+        android:textSize="14sp"
+        android:layout_below="@id/period_of_study_question"
+        android:layout_toRightOf="@id/one_two_year"/>
+
+    <Button
+        android:layout_width="295dp"
+        android:layout_height="48dp"
+        android:background="@drawable/button_round"
+        android:textColor="@color/buttonTextColour"
+        android:text="Next"
+        android:id="@+id/nextPref"
+        android:textAllCaps="false"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="25dp"/>
+
+</RelativeLayout>

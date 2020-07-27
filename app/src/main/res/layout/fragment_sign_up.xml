@@ -16,9 +16,9 @@
         android:layout_marginBottom="25dp"
         android:layout_alignLeft="@id/full_name"
         android:text="Sign Up"
+        android:fontFamily="@font/montserrat_bold"
         android:textColor="@color/appTextColour"
-        android:textSize="25sp"
-        android:textStyle="bold" />
+        android:textSize="25sp" />
 
     <!-- Creates the full name edit text field -->
     <com.google.android.material.textfield.TextInputLayout
@@ -35,10 +35,10 @@
             android:layout_width="340dp"
             android:layout_height="40dp"
             android:background="@drawable/edit_text_round"
+            android:fontFamily="@font/montserrat_bold"
             android:hint="Full Name"
             android:inputType="text"
-            android:padding="10dp"
-            android:textStyle="bold" />
+            android:padding="10dp" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -60,11 +60,11 @@
             android:layout_width="340dp"
             android:layout_height="40dp"
             android:background="@drawable/edit_text_round"
+            android:fontFamily="@font/montserrat_bold"
             android:hint="Username"
             android:inputType="text"
             android:maxLength="15"
-            android:padding="10dp"
-            android:textStyle="bold" />
+            android:padding="10dp" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -84,10 +84,10 @@
             android:layout_height="40dp"
             android:layout_below="@id/username"
             android:background="@drawable/edit_text_round"
+            android:fontFamily="@font/montserrat_bold"
             android:hint="Email"
             android:inputType="textEmailAddress"
-            android:padding="10dp"
-            android:textStyle="bold" />
+            android:padding="10dp" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -107,10 +107,10 @@
             android:layout_width="340dp"
             android:layout_height="40dp"
             android:background="@drawable/edit_text_round"
+            android:fontFamily="@font/montserrat_bold"
             android:hint="Password"
             android:inputType="textPassword"
-            android:padding="10dp"
-            android:textStyle="bold" />
+            android:padding="10dp" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -130,10 +130,10 @@
             android:layout_width="340dp"
             android:layout_height="40dp"
             android:background="@drawable/edit_text_round"
+            android:fontFamily="@font/montserrat_bold"
             android:hint="Confirm Password"
             android:inputType="textPassword"
-            android:padding="10dp"
-            android:textStyle="bold" />
+            android:padding="10dp" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -145,9 +145,9 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:text="By signing up you agree to the terms of service and privacy policy"
+        android:fontFamily="@font/open_sans_bold"
         android:textColor="@color/appTextColour"
-        android:textSize="15sp"
-        android:textStyle="bold" />
+        android:textSize="15sp" />
 
     <Button
         android:id="@+id/sign_up"
@@ -157,9 +157,11 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:background="@drawable/button_round"
+        android:fontFamily="@font/open_sans_bold"
         android:text="Sign Up"
-        android:textColor="@color/buttonTextColour"
-        android:textStyle="bold"/>
+        android:textAllCaps="false"
+        android:textSize="16sp"
+        android:textColor="@color/buttonTextColour"/>
 
     <TextView
         android:id="@+id/login_here"
@@ -170,8 +172,8 @@
         android:padding="15dp"
         android:text="Already have an account? Login."
         android:textColor="@color/appTextColour"
-        android:textSize="15sp"
-        android:textStyle="bold" />
+        android:fontFamily="@font/montserrat_bold"
+        android:textSize="15sp"/>
 
     <ProgressBar
         android:id="@+id/signUpProgressBar"

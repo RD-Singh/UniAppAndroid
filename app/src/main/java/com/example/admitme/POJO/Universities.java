@@ -1,19 +1,24 @@
 package com.example.admitme.POJO;
 
+import org.bson.Document;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Set;
+
 public class Universities {
 
     private String mUniversityName;
     private String mUniversityLocation;
-    private double mAcceptanceRate;
-    private int bookmarkResource;
-    private UndergradMajor undergraduateMajor;
+    private HashMap<String, String> industryPrograms = new HashMap<>();
+    private ArrayList<String> programs;
+   // private double mAcceptanceRate;
+    //private UndergradMajor undergraduateMajor;
 
-    public Universities(String universityName, String universityLocation, double acceptanceRate, int bookmark){
-
+    public Universities(String universityName, String universityLocation, Set<String> keys){
         mUniversityLocation = universityLocation;
         mUniversityName = universityName;
-        mAcceptanceRate = acceptanceRate;
-        bookmarkResource = bookmark;
+        programs = new ArrayList<>(keys);
     }
 
     public String getUniversityName() {
@@ -24,72 +29,27 @@ public class Universities {
         return mUniversityLocation;
     }
 
-    public double getAcceptanceRate() {
-        return mAcceptanceRate;
+    public void addIndustryProgram(String industryPrograms, String duration){
+        this.industryPrograms.put(industryPrograms, duration);
     }
 
-    public int getBookmarkResource() {
-        return bookmarkResource;
+    public void addProgramInfo(String programs){
+        this.programs.add(programs);
     }
 
-    public UndergradMajor getUndergraduateMajor() {
-        return undergraduateMajor;
+    public void removeProgram(String programs){
+        this.programs.remove(programs);
+    }
+    public void removeIndustryProgram(String industryPrograms){
+        this.industryPrograms.remove(industryPrograms);
     }
 
-    public class UndergradMajor {
+    public HashMap<String, String> getIndustryPrograms(){
+        return industryPrograms;
+    }
 
-        private String mMajor;
-        private double mMinGPA;
-        private double mTuition;
-        private String mDescription;
-        private int mMinGrade12Courses;
-        private boolean mCOOP;
-        private boolean mHonours;
-        private String mDegreeType;
-
-        public UndergradMajor(String major, String degreeType, String description, int minGrade12Courses,
-                                  boolean COOP, boolean honours, double tuition, double minGPA) {
-            mMajor = major;
-            mMinGrade12Courses = minGrade12Courses;
-            mCOOP = COOP;
-            mHonours = honours;
-            mDegreeType = degreeType;
-            mDescription = description;
-            mTuition = tuition;
-            mMinGPA = minGPA;
-        }
-
-        public String getMajor() {
-            return mMajor;
-        }
-
-        public double getMinGPA() {
-            return mMinGPA;
-        }
-
-        public double getTuition() {
-            return mTuition;
-        }
-
-        public String getDescription() {
-            return mDescription;
-        }
-
-        public int getMinGrade12Courses() {
-            return mMinGrade12Courses;
-        }
-
-        public boolean isCOOP() {
-            return mCOOP;
-        }
-
-        public boolean isHonours() {
-            return mHonours;
-        }
-
-        public String getDegreeType() {
-            return mDegreeType;
-        }
+    public ArrayList<String> getPrograms(){
+        return programs;
     }
 
 

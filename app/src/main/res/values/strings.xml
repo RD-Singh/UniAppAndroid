@@ -3,4 +3,5 @@
     <string name="app_description">Welcome to AdmitU! The future of educational counselling. To get started click next…</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="academics_description">Enter the courses you are currently taking and their respective percentages (if you don\'t have percentages avaliable for that course, enter your percentage from your previous year</string>
 </resources>

@@ -12,7 +12,18 @@
         android:id="@+id/top_result"
         android:text="Result"
         android:fontFamily="@font/montserrat_bold"
-        android:textSize="35sp"
+        android:textSize="25sp"
+        android:textColor="@color/appTextColour"
+        android:layout_centerInParent="true"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/uni_result"
+        android:text="UniResult"
+        android:layout_below="@id/top_result"
+        android:fontFamily="@font/montserrat_bold"
+        android:textSize="25sp"
         android:textColor="@color/appTextColour"
         android:layout_centerInParent="true"/>
 
@@ -20,6 +31,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="You've matched to:"
+        android:gravity="center"
         android:textColor="@color/appTextColour"
         android:layout_above="@id/top_result"
         android:fontFamily="@font/montserrat_bold"
