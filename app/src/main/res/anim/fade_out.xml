@@ -4,5 +4,5 @@
         android:interpolator="@android:anim/anticipate_overshoot_interpolator"
         android:fromAlpha="1.0" android:toAlpha="0.0"
         android:fillAfter="true"
-        android:duration="300" />
+        android:duration="500"/>
 </set>

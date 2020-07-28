@@ -11,13 +11,13 @@
         android:id="@+id/logo"
         android:layout_width="173dp"
         android:layout_height="173dp"
-        android:layout_above="@id/AdmitMe"
+        android:layout_above="@id/AdmitU"
         android:layout_centerHorizontal="true"
         android:src="@drawable/admitu_logo_placeholder" />
 
     <!-- Creates the name of the app -->
     <TextView
-        android:id="@+id/AdmitMe"
+        android:id="@+id/AdmitU"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
@@ -31,7 +31,7 @@
         android:id="@+id/sign_in"
         android:layout_width="295dp"
         android:layout_height="48dp"
-        android:layout_below="@id/AdmitMe"
+        android:layout_below="@id/AdmitU"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
         android:background="@drawable/button_round"
