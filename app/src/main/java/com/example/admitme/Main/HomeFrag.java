@@ -13,7 +13,12 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.admitme.Funnel.UniversityItem;
 import com.example.admitme.R;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 // Creates a class that is linked to the xml file
 public class HomeFrag extends Fragment {
@@ -23,6 +28,8 @@ public class HomeFrag extends Fragment {
     private TextView mUniversityOneName, mUniversityTwoName, mUniversityThreeName;
     private TextView mUniversityOneDescription, mUniversityTwoDescription, mUniversityThreeDescription;
 
+    public static ArrayList<UniversityItem> uniList = new ArrayList<>();
+
     // Contains all of the java code that will run
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -31,6 +38,11 @@ public class HomeFrag extends Fragment {
 
         // Calls the method to set up the user interface views
         setupUI(v);
+        Set<UniversityItem> clearDupes = new HashSet<>(uniList);
+        uniList.clear();
+        uniList.addAll(clearDupes);
+
+        System.out.println(uniList);
 
         mHomeDialog = new Dialog(HomeFrag.this.getContext());
 

@@ -71,10 +71,8 @@ public class FunnelPreferencesFrag extends Fragment {
         nextPref.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(isLessOne || isOneToTwo || isMoreTwo){
-                    Toast toast = Toast.makeText(FunnelPreferencesFrag.this.getContext(), "Please make sure to select one of the above options", Toast.LENGTH_SHORT);
-                    toast.setGravity(Gravity.CENTER, 0, 0);
-                    toast.show();
+                if(!(isLessOne || isOneToTwo || isMoreTwo)){
+                    Toast.makeText(FunnelPreferencesFrag.this.getContext(), "Please make sure to select one of the above options", Toast.LENGTH_SHORT).show();
                 } else {
                     goToRIASEC();
                 }

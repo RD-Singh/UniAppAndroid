@@ -7,7 +7,7 @@ import androidx.fragment.app.Fragment;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import com.example.admitme.Funnel.FunnelFrag;
+import com.example.admitme.Funnel.UnisFrag;
 import com.example.admitme.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -34,9 +34,6 @@ public class StartupActivity extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.home_page:
                     selectedFragment = new HomeFrag();
-                    break;
-                case R.id.matching_criteria:
-                    selectedFragment = new FunnelFrag();
                     break;
                 case R.id.settings:
                     selectedFragment = new SettingsFrag();

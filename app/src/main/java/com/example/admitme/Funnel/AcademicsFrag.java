@@ -190,7 +190,7 @@ public class AcademicsFrag extends Fragment {
                 break;
             case "physics":
                 subjectIndustries.add("Engineering");
-                subjectIndustries.add("Computer, Software and Web Development");
+                subjectIndustries.add("Computers, Software and Web Development");
                 subjectIndustries.add("Architecture");
                 subjectIndustries.add("Aviation");
                 break;
@@ -198,7 +198,7 @@ public class AcademicsFrag extends Fragment {
             case "pre-Calculus":
                 subjectIndustries.add("Engineering");
                 subjectIndustries.add("Data Science and Analytics");
-                subjectIndustries.add("Computer, Software and Web Development");
+                subjectIndustries.add("Computers, Software and Web Development");
                 subjectIndustries.add("Architecture");
                 subjectIndustries.add("Mathematics");
                 subjectIndustries.add("Economics");

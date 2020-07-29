@@ -4,15 +4,18 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.admitme.Funnel.AcademicsFrag;
 import com.example.admitme.Funnel.FunnelPreferencesFrag;
+import com.example.admitme.Funnel.UnisFrag;
 import com.example.admitme.LoginRegister.LoginFrag;
 import com.example.admitme.POJO.Universities;
 import com.example.admitme.R;
@@ -33,33 +36,19 @@ import io.realm.mongodb.mongo.MongoClient;
 import io.realm.mongodb.mongo.MongoCollection;
 import io.realm.mongodb.mongo.iterable.FindIterable;
 import io.realm.mongodb.mongo.iterable.MongoCursor;
-import retrofit2.http.FormUrlEncoded;
 
 public class RiasecFrag extends Fragment {
 
-    private static final int ONE_REQ = 1;
-    private static final int TWO_REQ = 2;
-    private static final int THREE_REQ = 3;
-    private static final int FOUR_REQ = 3;
-
     public static HashMap<String, Integer> riasec = new HashMap<>();
     private TextView result;
+    private Button nextUni;
     public static int first, second, third, fourth, fifth, sixth;
     private String firstStr, secondStr, thirdStr, fourthStr, fifthStr, sixthStr;
-    public static boolean isProg = false;
     char f, s, t;
     public ArrayList<String> riasecCode;
-    public static ArrayList<String> resultStr = new ArrayList<>();
-    private MongoClient client;
-    private MongoCollection<Document> uniCollection;
     int i = 0;
     public ArrayList<Integer> indeces = new ArrayList<>();
     public static ArrayList<String> industries = new ArrayList<>();
-    public static ArrayList<Universities> universities = new ArrayList<>();
-
-    public String progType;
-
-    public Universities university;
 
     List<String> code = new ArrayList<>();
     List<String> industry = new ArrayList<>();
@@ -78,9 +67,6 @@ public class RiasecFrag extends Fragment {
         riasec.put("Enterprising", Enterprising.enterprisingCount);
         riasec.put("Conventional", Conventional.conventionalCount);
         System.out.println(RiasecFrag.industries);
-
-        client = LoginFrag.app.currentUser().getMongoClient("mongodb-atlas");
-        uniCollection = client.getDatabase("AdmitU").getCollection("Universities");
 
         Object[] a = riasec.entrySet().toArray();
         Arrays.sort(a, new Comparator() {
@@ -122,9 +108,23 @@ public class RiasecFrag extends Fragment {
 
         checkIndustries();
         result.setText(industries.toString().replace("[", "").replace("]", ""));
-        uniSearch();
+
+        nextUni.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToUnis();
+            }
+        });
 
         return v;
+    }
+
+    private void goToUnis(){
+        UnisFrag unisFrag = new UnisFrag();
+        FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
+        fragmentTransaction.setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right, R.anim.enter_from_left, R.anim.exit_to_right);
+        fragmentTransaction.replace(R.id.funnel_container, unisFrag);
+        fragmentTransaction.commit();
     }
 
     public void checkIndustries() {
@@ -138,83 +138,6 @@ public class RiasecFrag extends Fragment {
                     iterator.remove();
             }
         }
-    }
-
-    private void uniSearch() {
-        for (final String industry : RiasecFrag.industries) {
-            Document project = new Document("University Name", 1).append("Industries", industry).append(industry, 1)
-                    .append("Certificate Programs", 1).append("Diplomas", 1).append("Bachelors", 1);
-            FindIterable<Document> fi = uniCollection.find().filter(new Document("Industries", industry)).projection(project);
-            fi.iterator().addOnCompleteListener(new OnCompleteListener<MongoCursor<Document>>() {
-                @Override
-                public void onComplete(@NonNull Task<MongoCursor<Document>> task) {
-                    String inIndustry = industry;
-                    if (task.isSuccessful()) {
-                        MongoCursor<Document> doc = task.getResult();
-                        try {
-                            int i = 0;
-                            while (doc.hasNext()) {
-                                Document document = doc.next();
-                                resultStr.add(i, document.getString("University Name"));
-                                String uniName = document.getString("University Name");
-                                String location = document.getString("Location");
-                                Document industry = (Document) document.get(inIndustry);
-
-                                if (FunnelPreferencesFrag.isLessOne) {
-                                    progType = "Certificate Programs";
-                                } else if (FunnelPreferencesFrag.isOneToTwo) {
-                                    progType = "Diplomas";
-                                } else if (FunnelPreferencesFrag.isMoreTwo) {
-                                    progType = "Bachelors";
-                                }
-
-                                if (industry.containsKey(progType)) {
-                                    Document type = (Document) industry.get(progType);
-                                    university = new Universities(uniName, location, type.keySet());
-                                    for (String prog : university.getPrograms()) {
-                                        Document programInfo = (Document) type.get(prog);
-                                        if (programInfo.containsKey("Requirements")) {
-                                            ArrayList<Double> requirements = (ArrayList<Double>) programInfo.get("Requirements");
-                                            if ((requirements.size() + 1) == ONE_REQ) {
-                                                if (englishRequirments(Double.parseDouble(AcademicsFrag.englishMark), requirements.get(0))) {
-                                                    university.addIndustryProgram(prog, programInfo.getString("Duration"));
-                                                    isProg = true;
-                                                }
-                                            } else if ((requirements.size() + 1) == TWO_REQ) {
-                                                if (englishRequirments(Double.parseDouble(AcademicsFrag.englishMark), requirements.get(0))
-                                                        && mathRequirements(Double.parseDouble(AcademicsFrag.precalcMark), requirements.get(0))) {
-                                                    university.addIndustryProgram(prog, programInfo.getString("Duration"));
-                                                    isProg = true;
-                                                }
-                                            }
-                                            System.out.println(university.getIndustryPrograms().toString());
-                                        }
-                                    }
-                                    if (isProg) {
-                                        universities.add(university);
-                                    }
-                                }
-                                i++;
-                            }
-                        } finally {
-                            doc.close();
-                        }
-                    } else {
-                        Log.e("TAG", "Error: ", task.getException());
-                    }
-                    // uniResult.setText(resultStr.toString());
-                }
-            });
-        }
-        System.out.println(resultStr);
-    }
-
-    private boolean englishRequirments(double englishMark, double uniRequirement) {
-        return englishMark > uniRequirement;
-    }
-
-    private boolean mathRequirements(double mathMark, double uniRequirement) {
-        return mathMark > uniRequirement;
     }
 
     private void allRiasecCodes() {
@@ -339,7 +262,7 @@ public class RiasecFrag extends Fragment {
         code.add(4, "RIC");
         industry.add(4, "Engineering");
         code.add(5, "RCI");
-        industry.add(5, "Computer, Software and Web Development");
+        industry.add(5, "Computers, Software and Web Development");
         code.add(6, "RSA");
         industry.add(6, "Environmental Studies");
         code.add(7, "RSC");
@@ -382,7 +305,7 @@ public class RiasecFrag extends Fragment {
         code.add(4, "IRC");
         industry.add(4, "Engineering");
         code.add(5, "IRC");
-        industry.add(5, "Computer, Software and Web Development");
+        industry.add(5, "Computers, Software and Web Development");
         code.add(6, "IES");
         industry.add(6, "Law and Criminal Justice");
         code.add(7, "IRS");
@@ -423,7 +346,7 @@ public class RiasecFrag extends Fragment {
         code.add(1, "AER");
         industry.add(1, "Music");
         code.add(2, "ARC");
-        industry.add(2, "Computer, Software and Web Development");
+        industry.add(2, "Computers, Software and Web Development");
         code.add(3, "AIS");
         industry.add(3, "Humanities");
         code.add(4, "ASI");
@@ -559,7 +482,7 @@ public class RiasecFrag extends Fragment {
         code.add(2, "CEI");
         industry.add(2, "Accounting");
         code.add(3, "CIR");
-        industry.add(3, "Computer, Software and Web Development");
+        industry.add(3, "Computers, Software and Web Development");
         code.add(4, "CSA");
         industry.add(4, "Education");
         code.add(5, "CEI");
@@ -594,5 +517,6 @@ public class RiasecFrag extends Fragment {
 
     private void setupUI(View v) {
         result = v.findViewById(R.id.top_result);
+        nextUni = v.findViewById(R.id.nextUni);
     }
 }

@@ -1,5 +1,7 @@
 package com.example.admitme.POJO;
 
+import com.example.admitme.Funnel.UnisFrag;
+
 import org.bson.Document;
 
 import java.util.ArrayList;
@@ -12,17 +14,26 @@ public class Universities {
     private String mUniversityLocation;
     private HashMap<String, String> industryPrograms = new HashMap<>();
     private ArrayList<String> programs;
-   // private double mAcceptanceRate;
-    //private UndergradMajor undergraduateMajor;
 
-    public Universities(String universityName, String universityLocation, Set<String> keys){
+    private String mUniversityIndustry;
+
+    public static ArrayList<Universities> universities = new ArrayList<>();
+
+    // private double mAcceptanceRate;
+    //private UndergradMajor undergraduateMajor;
+    public Universities(String universityName, String universityLocation, Set<String> keys, String universityIndustry){
         mUniversityLocation = universityLocation;
         mUniversityName = universityName;
         programs = new ArrayList<>(keys);
+        mUniversityIndustry = universityIndustry;
     }
 
     public String getUniversityName() {
         return mUniversityName;
+    }
+
+    public String getUniversityIndustry() {
+        return mUniversityIndustry;
     }
 
     public String getUniversityLocation() {
@@ -52,5 +63,11 @@ public class Universities {
         return programs;
     }
 
+    public static ArrayList<Universities> getUniversities() {
+        return universities;
+    }
 
+    public static void addUniversities(Universities uni) {
+        universities.add(uni);
+    }
 }

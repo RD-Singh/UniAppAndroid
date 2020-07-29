@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Funnel.UnisFrag"
+    android:background="@drawable/background">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:id="@+id/desc_rl">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="The following are the universities with their respective programs that you have matched to. Click on a university to save it to your matched universities."
+            android:gravity="center"
+            android:layout_margin="10dp"
+            android:textSize="14sp"
+            android:id="@+id/unisDesc"
+            android:textColor="@color/appTextColour"
+            android:fontFamily="@font/open_sans_bold"
+            android:textAllCaps="false"
+            android:layout_marginBottom="15dp"
+            android:layout_centerHorizontal="true"/>
+
+    </RelativeLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp"
+        android:scrollbars="vertical"
+        android:id="@+id/uni_recycler_view"
+        android:layout_below="@id/desc_rl"
+        android:layout_above="@id/buttonHolder"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/buttonHolder">
+
+        <Button
+            android:layout_width="295dp"
+            android:layout_height="48dp"
+            android:text="Continue"
+            android:id="@+id/continueHome"
+            android:background="@drawable/button_round"
+            android:textColor="@color/buttonTextColour"
+            android:fontFamily="@font/open_sans_bold"
+            android:textAllCaps="false"
+            android:layout_marginBottom="15dp"
+            android:layout_centerHorizontal="true"/>
+
+    </RelativeLayout>
+</RelativeLayout>

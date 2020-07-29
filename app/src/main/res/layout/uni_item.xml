@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="5dp"
+    android:layout_marginBottom="5dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:paddingTop="5dp"
+            android:text="University Name"
+            android:id="@+id/uni_name"
+            android:textColor="@color/appTextColour"
+            android:fontFamily="@font/montserrat_bold"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="@color/buttonTextColour"
+            android:text="Location"
+            android:paddingLeft="5dp"
+            android:id="@+id/uni_location"
+            android:layout_marginTop="5dp"
+            android:paddingRight="5dp"
+            android:fontFamily="@font/open_sans_bold"
+            android:layout_below="@id/prog_desc"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:textColor="@color/buttonTextColour"
+            android:text="INDUSTRY"
+            android:id="@+id/uni_industry"
+            android:fontFamily="@font/open_sans_bold"
+            android:layout_toRightOf="@id/industry_desc"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_below="@id/uni_name" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:textColor="@color/buttonTextColour"
+            android:text="Industry:"
+            android:layout_below="@id/uni_name"
+            android:layout_marginLeft="5dp"
+            android:id="@+id/industry_desc"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/open_sans_bold"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:textColor="@color/buttonTextColour"
+            android:text="Program Type in"
+            android:layout_below="@id/uni_industry"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:id="@+id/prog_desc"
+            android:fontFamily="@font/open_sans_bold"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:textColor="@color/buttonTextColour"
+            android:text="Program"
+            android:layout_toRightOf="@id/prog_desc"
+            android:layout_below="@id/uni_industry"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="6dp"
+            android:id="@+id/uni_program"
+            android:fontFamily="@font/open_sans_bold"/>
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/image_star"
+            android:src="@drawable/ic_not_filled_star"
+            android:layout_alignParentRight="true"/>
+
+    </RelativeLayout>
+    
+</androidx.cardview.widget.CardView>

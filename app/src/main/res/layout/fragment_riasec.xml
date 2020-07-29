@@ -19,17 +19,6 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/uni_result"
-        android:text="UniResult"
-        android:layout_below="@id/top_result"
-        android:fontFamily="@font/montserrat_bold"
-        android:textSize="25sp"
-        android:textColor="@color/appTextColour"
-        android:layout_centerInParent="true"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:text="You've matched to:"
         android:gravity="center"
         android:textColor="@color/appTextColour"
@@ -37,5 +26,19 @@
         android:fontFamily="@font/montserrat_bold"
         android:textSize="35sp"
         android:layout_centerInParent="true"/>
+
+    <Button
+        android:layout_width="295dp"
+        android:layout_height="48dp"
+        android:text="Next"
+        android:id="@+id/nextUni"
+        android:textAllCaps="false"
+        android:textSize="16sp"
+        android:fontFamily="@font/open_sans_bold"
+        android:textColor="@color/buttonTextColour"
+        android:background="@drawable/button_round"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
+        android:layout_centerHorizontal="true"/>
 
 </RelativeLayout>

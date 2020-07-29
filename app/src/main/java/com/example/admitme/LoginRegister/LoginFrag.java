@@ -48,7 +48,7 @@ public class LoginFrag extends Fragment {
     private TextView forgetPassword, signUpHere;
     private MongoClient client;
     private MongoCollection<Document> accountsColl, uniCollection;
-    public Accounts account = new Accounts();
+    public static Accounts account = new Accounts();
 
     private Credentials credentials;
 
